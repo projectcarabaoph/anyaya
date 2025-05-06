@@ -10,3 +10,8 @@ export const signInWithOauthSchema = z.object({
     provider: enumsOauthProvider
         .describe('Supported OAuth providers')
 });
+
+export const verifyOtpTokenSchema = z.object({
+    email: z.string().email(),
+    token: z.string().length(6),
+});

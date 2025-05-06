@@ -1,8 +1,10 @@
 import { Request, Response } from "express"
 import asyncHandler from "express-async-handler"
+
 import { browserClient } from "@configs/supabase/browser-client"
-import { signInWithEmailSchema, signInWithOauthSchema } from "@utils/schemas"
 import { serverClient } from "@configs/supabase/server-client"
+
+import { signInWithEmailSchema, signInWithOauthSchema, verifyOtpTokenSchema } from "@utils/schemas"
 
 
 export const signInWithEmail = asyncHandler(async (req: Request, res: Response) => {
@@ -43,4 +45,22 @@ export const signInWithOauth = asyncHandler(async (req: Request, res: Response) 
 
     res.status(200).json(data)
 
+})
+
+export const verifyOtpToken = asyncHandler(async (req: Request, res: Response) => {
+
+    const result = verifyOtpTokenSchema.safeParse(req.body)
+
+    if (!result.success) throw new Error(result.error.message)
+
+    const { email, token } = result.data
+
+    const supabase = serverClient(req, res)
+
+    const { data, error } = await supabase.auth
+        .verifyOtp({ email, token, type: 'email' })
+
+    if (error) throw new Error(error.message)
+
+    res.status(200).json({ data: { accessToken: data.session?.access_token } })
 })
