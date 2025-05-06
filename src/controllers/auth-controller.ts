@@ -1,34 +1,23 @@
 import { Request, Response } from "express"
+import asyncHandler from "express-async-handler"
 import { browserClient } from "@configs/supabase/browser-client"
 import { signInWithEmailSchema } from "@utils/schemas"
 
 
-const errorHandler = (err: any, req: Request, res: Response) => {
-    if (err instanceof Error) {
-        return res.status(400).json({ error: err.message })
-    }
-    return res.status(500).json({ error: 'Internal server error' })
+export const signInWithEmail = asyncHandler(async (req: Request, res: Response) => {
 
-}
+    const result = signInWithEmailSchema.safeParse(req.body)
 
-export const signInWithEmail = async (req: Request, res: Response) => {
+    if (!result.success) throw new Error(result.error.message)
 
-    try {
-        const result = signInWithEmailSchema.safeParse(req.body)
+    const supabase = browserClient()
 
-        if (!result.success) {
-            throw new Error(result.error.message)
-        }
+    const { data, error } = await supabase.auth.signInWithOtp({
+        email: result.data.email,
+    })
 
-        const supabase = browserClient()
+    if (error) throw new Error(error.message)
 
-        const { data, error } = await supabase.auth.signInWithOtp({
-            email: result.data.email,
-        })
+    res.status(200).json(data)
 
-        return res.status(200).json(data)
-
-    } catch (error) {
-        errorHandler(error, req, res)
-    }
-}
+})
