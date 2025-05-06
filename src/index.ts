@@ -7,6 +7,10 @@ import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 
+
+// routes
+import authRoutes from '@routes/auth-routes'
+
 dotenv.config()
 
 const { NODE_PORT, NODE_PUBLIC_DEV_BASE_URL } = process.env
@@ -34,6 +38,8 @@ app.use(morgan('common'));
 app.use(express.json());
 app.use(cookieParser());
 // app.use(limiter);
+
+app.use('/api/auth', authRoutes)
 
 
 app.get('/', (req, res) => {
