@@ -82,3 +82,15 @@ export const callbackToken = asyncHandler(async (req: Request, res: Response) =>
     res.status(200).json({ accessToken: data.session?.access_token })
 
 })
+
+export const refreshToken = asyncHandler(async (req: Request, res: Response) => {
+
+    const supabase = serverClient(req, res)
+
+    const { data, error } = await supabase.auth.getSession()
+
+    if (error) throw new Error(error.message)
+
+    res.status(200).json({ accessToken: data.session?.access_token })
+
+})
