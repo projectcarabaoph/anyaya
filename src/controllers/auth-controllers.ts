@@ -1,109 +1,163 @@
 import { Request, Response } from "express"
-import asyncHandler from "express-async-handler"
 
 import { browserClient } from "@configs/supabase/browser-client"
 import { serverClient } from "@configs/supabase/server-client"
 
-import { callbackTokenSchema, signInWithEmailSchema, signInWithOauthSchema, verifyOtpTokenSchema } from "@utils/schemas"
+import {
+    callbackTokenSchema,
+    signInWithEmailSchema,
+    signInWithOauthSchema,
+    verifyOtpTokenSchema
+} from "@utils/schemas"
+
+const errorHandler = (err: any, req: Request, res: Response) => {
+
+    if (err instanceof Error) {
+        return res.status(400).json({ message: err.message })
+    }
+    return res.status(500).json({ message: 'Internal server error' })
+
+}
+
+export const signInWithEmail = async (req: Request, res: Response) => {
+
+    try {
+        const result = signInWithEmailSchema.safeParse(req.body)
+
+        if (!result.success) throw new Error(result.error.errors[0].message)
+
+        const supabase = browserClient()
+
+        const { data, error } = await supabase.auth.signInWithOtp({
+            email: result.data.email,
+        })
+
+        if (error) throw new Error(error.message)
+
+        res.status(200).json({ data })
+
+    } catch (error) {
+
+        errorHandler(error, req, res)
+    }
+
+}
 
 
-export const signInWithEmail = asyncHandler(async (req: Request, res: Response) => {
+export const signInWithOauth = async (req: Request, res: Response) => {
 
-    const result = signInWithEmailSchema.safeParse(req.body)
+    try {
 
-    if (!result.success) throw new Error(result.error.message)
+        const result = signInWithOauthSchema.safeParse(req.body)
 
-    const supabase = browserClient()
+        if (!result.success) throw new Error(result.error.errors[0].message)
 
-    const { data, error } = await supabase.auth.signInWithOtp({
-        email: result.data.email,
-    })
+        const supabase = serverClient(req, res)
 
-    if (error) throw new Error(error.message)
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: result.data.provider,
+            options: {
+                redirectTo: `${process.env.NODE_PUBLIC_DEV_BASE_URL}/auth/callback`,
+            }
+        })
 
-    res.status(200).json(data)
+        if (error) throw new Error(error.message)
 
-})
+        res.status(200).json({ data })
+
+    } catch (error) {
+
+        errorHandler(error, req, res)
+    }
+
+}
+
+export const verifyOtpToken = async (req: Request, res: Response) => {
+
+    try {
+
+        const result = verifyOtpTokenSchema.safeParse(req.body)
+
+        if (!result.success) throw new Error(result.error.errors[0].message)
+
+        const { email, token } = result.data
+
+        const supabase = serverClient(req, res)
+
+        const { data, error } = await supabase.auth
+            .verifyOtp({ email, token, type: 'email' })
+
+        if (error) throw new Error(error.message)
+
+        res.status(200).json({ accessToken: data.session?.access_token })
+
+    } catch (error) {
+
+        errorHandler(error, req, res)
+    }
+}
+
+export const callbackToken = async (req: Request, res: Response) => {
+
+    try {
+
+        const result = callbackTokenSchema.safeParse(req.body)
+
+        if (!result.success) throw new Error(result.error.errors[0].message)
+
+        const supabase = serverClient(req, res)
+
+        const { code } = result.data
+
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+
+        if (error) throw new Error(error.message)
+
+        res.status(200).json({ accessToken: data.session?.access_token })
+
+    } catch (error) {
+
+        errorHandler(error, req, res)
+    }
+
+}
+
+export const refreshToken = async (req: Request, res: Response) => {
+
+    try {
+
+        const supabase = serverClient(req, res)
+
+        const { data, error } = await supabase.auth.getSession()
+
+        if (error) throw new Error(error.message)
+
+        res.status(200).json({ accessToken: data.session?.access_token })
 
 
-export const signInWithOauth = asyncHandler(async (req: Request, res: Response) => {
+    } catch (error) {
 
-    const result = signInWithOauthSchema.safeParse(req.body)
+        errorHandler(error, req, res)
 
-    if (!result.success) throw new Error(result.error.message)
-
-    const supabase = serverClient(req, res)
-
-    const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: result.data.provider,
-        options: {
-            redirectTo: `${process.env.NODE_PUBLIC_DEV_BASE_URL}/auth/callback`,
-        }
-    })
-
-    if (error) throw new Error(error.message)
-
-    res.status(200).json(data)
-
-})
-
-export const verifyOtpToken = asyncHandler(async (req: Request, res: Response) => {
-
-    const result = verifyOtpTokenSchema.safeParse(req.body)
-
-    if (!result.success) throw new Error(result.error.message)
-
-    const { email, token } = result.data
-
-    const supabase = serverClient(req, res)
-
-    const { data, error } = await supabase.auth
-        .verifyOtp({ email, token, type: 'email' })
-
-    if (error) throw new Error(error.message)
-
-    res.status(200).json({ accessToken: data.session?.access_token })
-})
-
-export const callbackToken = asyncHandler(async (req: Request, res: Response) => {
-
-    const result = callbackTokenSchema.safeParse(req.body)
-
-    if (!result.success) throw new Error(result.error.message)
-
-    const supabase = serverClient(req, res)
-
-    const { code } = result.data
-
-    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
-
-    if (error) throw new Error(error.message)
-
-    res.status(200).json({ accessToken: data.session?.access_token })
-
-})
-
-export const refreshToken = asyncHandler(async (req: Request, res: Response) => {
-
-    const supabase = serverClient(req, res)
-
-    const { data, error } = await supabase.auth.getSession()
-
-    if (error) throw new Error(error.message)
-
-    res.status(200).json({ accessToken: data.session?.access_token })
-
-})
+    }
+}
 
 
-export const signOut = asyncHandler(async (req: Request, res: Response) => {
+export const signOut = async (req: Request, res: Response) => {
 
-    const supabase = serverClient(req, res)
+    try {
 
-    const { error } = await supabase.auth.signOut()
+        const supabase = serverClient(req, res)
 
-    if (error) throw new Error(error.message)
+        const { error } = await supabase.auth.signOut()
 
-    res.status(200).json({ message: 'Signed out successfully' })
+        if (error) throw new Error(error.message)
 
-})
+        res.status(200).json({ message: 'Signed out successfully' })
+
+    } catch (error) {
+
+        errorHandler(error, req, res)
+    }
+
+}
