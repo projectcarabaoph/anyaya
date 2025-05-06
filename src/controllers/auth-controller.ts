@@ -1,5 +1,4 @@
 import { Request, Response } from "express"
-
 import { browserClient } from "@configs/supabase/browser-client"
 import { signInWithEmailSchema } from "@utils/schemas"
 
