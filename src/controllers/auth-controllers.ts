@@ -62,5 +62,5 @@ export const verifyOtpToken = asyncHandler(async (req: Request, res: Response) =
 
     if (error) throw new Error(error.message)
 
-    res.status(200).json({ data: { accessToken: data.session?.access_token } })
+    res.status(200).json({ accessToken: data.session?.access_token })
 })
