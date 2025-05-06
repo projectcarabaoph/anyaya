@@ -1,0 +1,46 @@
+{
+  "name": "anyaya",
+  "version": "1.0.0",
+  "description": "A template for an invite system",
+  "main": "index.js",
+  "scripts": {
+   "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+   "build": "tsc",
+   "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.4",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "module-alias": "^2.2.3",
+    "morgan": "^1.10.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/module-alias": "^2.0.4",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.15.12",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  },
+  "_moduleAliases": {
+    "@configs": "dist/configs",
+    "@controllers": "dist/controllers",
+    "@middlewares": "dist/middlewares",
+    "@routes": "dist/routes",
+    "@types": "dist/types", 
+    "@utils": "dist/utils"
+  }
+}
