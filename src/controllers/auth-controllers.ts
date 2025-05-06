@@ -94,3 +94,16 @@ export const refreshToken = asyncHandler(async (req: Request, res: Response) => 
     res.status(200).json({ accessToken: data.session?.access_token })
 
 })
+
+
+export const signOut = asyncHandler(async (req: Request, res: Response) => {
+
+    const supabase = serverClient(req, res)
+
+    const { error } = await supabase.auth.signOut()
+
+    if (error) throw new Error(error.message)
+
+    res.status(200).json({ message: 'Signed out successfully' })
+
+})
