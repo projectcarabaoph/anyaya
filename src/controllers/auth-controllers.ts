@@ -10,14 +10,8 @@ import {
     verifyOtpTokenSchema
 } from "@utils/schemas"
 
-const errorHandler = (err: any, req: Request, res: Response) => {
+import errorHandler from "@utils/misc/error-handler"
 
-    if (err instanceof Error) {
-        return res.status(400).json({ message: err.message })
-    }
-    return res.status(500).json({ message: 'Internal server error' })
-
-}
 
 export const signInWithEmail = async (req: Request, res: Response) => {
 
