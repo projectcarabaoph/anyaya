@@ -1,7 +1,9 @@
-import Express from 'express'
+import express, { Router } from 'express';
+
 import { signInWithEmail } from '@controllers/auth-controllers'
 
-const router = Express.Router()
+const router: Router = express.Router();
+
 
 router.post('/sign-in/email', signInWithEmail)
 
