@@ -4,9 +4,14 @@
   "description": "A template for an invite system",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+      "build:client": "tsc -p client/tsconfig.json || vite build", 
+      "dev:client": "vite dev", 
+      "build:server": "tsc -p server/tsconfig.json",
+      "dev:server": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+      "dev:nodemon": "nodemon --watch src -e ts --exec \"npm run dev\"",
+      "build": "npm run build:client && npm run build:server",
+      "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+      "start": "node server/dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +37,8 @@
     "@types/module-alias": "^2.0.4",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.12",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3"
