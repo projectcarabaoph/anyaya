@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler"
 import { browserClient } from "@configs/supabase/browser-client"
 import { serverClient } from "@configs/supabase/server-client"
 
-import { signInWithEmailSchema, signInWithOauthSchema, verifyOtpTokenSchema } from "@utils/schemas"
+import { callbackTokenSchema, signInWithEmailSchema, signInWithOauthSchema, verifyOtpTokenSchema } from "@utils/schemas"
 
 
 export const signInWithEmail = asyncHandler(async (req: Request, res: Response) => {
@@ -63,4 +63,22 @@ export const verifyOtpToken = asyncHandler(async (req: Request, res: Response) =
     if (error) throw new Error(error.message)
 
     res.status(200).json({ accessToken: data.session?.access_token })
+})
+
+export const callbackToken = asyncHandler(async (req: Request, res: Response) => {
+
+    const result = callbackTokenSchema.safeParse(req.body)
+
+    if (!result.success) throw new Error(result.error.message)
+
+    const supabase = serverClient(req, res)
+
+    const { code } = result.data
+
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+
+    if (error) throw new Error(error.message)
+
+    res.status(200).json({ accessToken: data.session?.access_token })
+
 })

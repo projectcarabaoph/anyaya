@@ -15,3 +15,7 @@ export const verifyOtpTokenSchema = z.object({
     email: z.string().email(),
     token: z.string().length(6),
 });
+
+export const callbackTokenSchema = z.object({
+    code: z.string().uuid(),
+});
