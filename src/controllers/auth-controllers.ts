@@ -11,6 +11,7 @@ import {
 } from "@utils/schemas"
 
 import errorHandler from "@utils/misc/error-handler"
+import ApiError from "@utils/misc/api-error"
 
 
 export const signInWithEmail = async (req: Request, res: Response) => {
