@@ -63,7 +63,7 @@ export const signInWithOauth = async (req: Request, res: Response) => {
 
         errorHandler(error, req, res)
         return
-        return
+
     }
 
 }
@@ -89,7 +89,6 @@ export const verifyOtpToken = async (req: Request, res: Response) => {
     } catch (error) {
 
         errorHandler(error, req, res)
-        return
         return
     }
 }
