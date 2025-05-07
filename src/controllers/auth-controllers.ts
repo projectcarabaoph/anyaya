@@ -18,21 +18,21 @@ export const signInWithEmail = async (req: Request, res: Response) => {
     try {
         const result = signInWithEmailSchema.safeParse(req.body)
 
-        if (!result.success) throw new Error(result.error.errors[0].message)
-
+        if (!result.success) throw new ApiError(result.error.errors[0].message, 400);
         const supabase = browserClient()
 
         const { data, error } = await supabase.auth.signInWithOtp({
             email: result.data.email,
         })
 
-        if (error) throw new Error(error.message)
+        if (error) throw new ApiError(error.message, error.status)
 
         res.status(200).json({ data })
 
     } catch (error) {
 
         errorHandler(error, req, res)
+        return
     }
 
 }
@@ -44,8 +44,7 @@ export const signInWithOauth = async (req: Request, res: Response) => {
 
         const result = signInWithOauthSchema.safeParse(req.body)
 
-        if (!result.success) throw new Error(result.error.errors[0].message)
-
+        if (!result.success) throw new ApiError(result.error.errors[0].message, 400);
         const supabase = serverClient(req, res)
 
         const { data, error } = await supabase.auth.signInWithOAuth({
@@ -55,13 +54,15 @@ export const signInWithOauth = async (req: Request, res: Response) => {
             }
         })
 
-        if (error) throw new Error(error.message)
+        if (error) throw new ApiError(error.message, error.status)
 
         res.status(200).json({ data })
 
     } catch (error) {
 
         errorHandler(error, req, res)
+        return
+        return
     }
 
 }
@@ -72,8 +73,7 @@ export const verifyOtpToken = async (req: Request, res: Response) => {
 
         const result = verifyOtpTokenSchema.safeParse(req.body)
 
-        if (!result.success) throw new Error(result.error.errors[0].message)
-
+        if (!result.success) throw new ApiError(result.error.errors[0].message, 400);
         const { email, token } = result.data
 
         const supabase = serverClient(req, res)
@@ -81,13 +81,15 @@ export const verifyOtpToken = async (req: Request, res: Response) => {
         const { data, error } = await supabase.auth
             .verifyOtp({ email, token, type: 'email' })
 
-        if (error) throw new Error(error.message)
+        if (error) throw new ApiError(error.message, error.status)
 
         res.status(200).json({ accessToken: data.session?.access_token })
 
     } catch (error) {
 
         errorHandler(error, req, res)
+        return
+        return
     }
 }
 
@@ -97,21 +99,21 @@ export const callbackToken = async (req: Request, res: Response) => {
 
         const result = callbackTokenSchema.safeParse(req.body)
 
-        if (!result.success) throw new Error(result.error.errors[0].message)
-
+        if (!result.success) throw new ApiError(result.error.errors[0].message, 400);
         const supabase = serverClient(req, res)
 
         const { code } = result.data
 
         const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
-        if (error) throw new Error(error.message)
+        if (error) throw new ApiError(error.message, error.status)
 
         res.status(200).json({ accessToken: data.session?.access_token })
 
     } catch (error) {
 
         errorHandler(error, req, res)
+        return
     }
 
 }
@@ -124,7 +126,7 @@ export const refreshToken = async (req: Request, res: Response) => {
 
         const { data, error } = await supabase.auth.getSession()
 
-        if (error) throw new Error(error.message)
+        if (error) throw new ApiError(error.message, error.status)
 
         res.status(200).json({ accessToken: data.session?.access_token })
 
@@ -132,6 +134,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     } catch (error) {
 
         errorHandler(error, req, res)
+        return
 
     }
 }
@@ -145,13 +148,14 @@ export const signOut = async (req: Request, res: Response) => {
 
         const { error } = await supabase.auth.signOut()
 
-        if (error) throw new Error(error.message)
+        if (error) throw new ApiError(error.message, error.status)
 
         res.status(200).json({ message: 'Signed out successfully' })
 
     } catch (error) {
 
         errorHandler(error, req, res)
+        return
     }
 
 }
