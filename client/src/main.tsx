@@ -5,6 +5,7 @@ import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
 import './index.css'
 import App from './App.tsx'
+import { AuthProvider } from '@contexts/auth-context.tsx';
 
 if (process.env.NODE_ENV === 'production') {
   disableReactDevTools();
@@ -12,8 +13,10 @@ if (process.env.NODE_ENV === 'production') {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Toaster position='top-right' richColors duration={3000} />
-    <App />
+    <AuthProvider>
+      <Toaster position='top-right' richColors duration={3000} />
+      <App />
+    </AuthProvider>
   </StrictMode>,
 )
 
