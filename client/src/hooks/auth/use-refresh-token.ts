@@ -27,7 +27,7 @@ const useRefreshToken = () => {
     }, [accessToken])
 
 
-    return { isLoading, accessToken, setAccessToken }
+    return { accessToken, setAccessToken, isLoading, setIsLoading }
 }
 
 export default useRefreshToken
