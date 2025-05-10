@@ -17,12 +17,12 @@ import serverPaths from "@configs/paths/server.paths.config"
 export const signInWithEmail = async (email: string) => {
     try {
         const response = await fetch(serverPaths.auth.signin.email, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': "application/json",
+                "Content-Type": "application/json",
                 Accept: "application/json"
             },
-            credentials: 'include',
+            credentials: "include",
             body: JSON.stringify({ email })
         })
 
@@ -44,9 +44,9 @@ export const signInWithEmail = async (email: string) => {
 export const signInWithOauth = async (provider: string) => {
     try {
         const response = await fetch(serverPaths.auth.signin.oauth, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': "application/json",
+                "Content-Type": "application/json",
                 Accept: "application/json"
             },
             body: JSON.stringify({ provider })
@@ -62,5 +62,29 @@ export const signInWithOauth = async (provider: string) => {
     } catch (error) {
         if (error instanceof Error) throw new Error(error.message);
 
+    }
+}
+
+
+export const verifyOtpToken = async () => {
+    try {
+        const response = await fetch(serverPaths.auth.signin.verify, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            }
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            const { message } = data
+            throw new Error(message)
+        }
+
+        return data
+    } catch (error) {
+        if (error instanceof Error) throw new Error(error.message);
     }
 }
