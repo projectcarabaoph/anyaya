@@ -20,14 +20,14 @@ const schema = z.object({
 const serverPaths = schema.parse({
     auth: {
         signin: {
-            email: "/sign-in/email",
-            oauth: "/sign-in/oauth",
-            verify: "/sign-in/verify",
-            callback: "/sign-in/callback",
-            refresh: "/sign-in/refresh"
+            email: "/api/auth/sign-in/email",
+            oauth: "/api/auth/sign-in/oauth",
+            verify: "/api/auth/sign-in/verify",
+            callback: "/api/auth/sign-in/callback",
+            refresh: "/api/auth/sign-in/refresh"
         },
         signout: {
-            user: "/sign-out"
+            user: "/api/auth/sign-out"
         }
     }
 } satisfies z.infer<typeof schema>)
