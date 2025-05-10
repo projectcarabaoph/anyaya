@@ -85,8 +85,7 @@ export const verifyOtpToken = async (email: string, token: string) => {
             throw new Error(message)
         }
 
-        const { accessToken } = data
-        return { accessToken }
+        return data
     } catch (error) {
         if (error instanceof Error) throw new Error(error.message);
     }
