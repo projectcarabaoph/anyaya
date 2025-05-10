@@ -39,3 +39,28 @@ export const signInWithEmail = async (email: string) => {
         if (error instanceof Error) throw new Error(error.message);
     }
 }
+
+
+export const signInWithOauth = async (provider: string) => {
+    try {
+        const response = await fetch(serverPaths.auth.signin.oauth, {
+            method: 'POST',
+            headers: {
+                'Content-Type': "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({ provider })
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            const { message } = data
+            throw new Error(message)
+        }
+        return data
+    } catch (error) {
+        if (error instanceof Error) throw new Error(error.message);
+
+    }
+}
