@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
       "build:client": "tsc -p client/tsconfig.json || vite build", 
-      "dev:client": "vite dev", 
+      "dev:client": "npm run dev --prefix client",
       "build:server": "tsc",
-      "dev:server": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+      "dev:server": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register server/src/index.ts",
       "dev:nodemon": "nodemon --watch src -e ts --exec \"npm run dev\"",
       "build": "npm run build:client && npm run build:server",
       "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
