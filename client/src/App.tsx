@@ -1,9 +1,10 @@
+import Sample from "@components/sample"
 
 function App() {
 
   return (
     <>
-
+      <Sample />
     </>
 
   )

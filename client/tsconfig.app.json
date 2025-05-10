@@ -7,6 +7,20 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+        /* Dont put this anywhere except here */
+    "baseUrl": "./src",
+     "paths": {
+      "@api/*": ["api/*"],
+      "@components/*": ["components/*"],
+      "@configs/*": ["configs/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
+      "@routes/*": ["routes/*"],
+      "@utils/*": ["utils/*"],
+      "@types/*": ["types/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
