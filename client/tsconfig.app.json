@@ -10,7 +10,6 @@
         /* Dont put this anywhere except here */
     "baseUrl": "./src",
      "paths": {
-      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
       "@configs/*": ["configs/*"],
       "@contexts/*": ["contexts/*"],
@@ -18,7 +17,8 @@
       "@pages/*": ["pages/*"],
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@api/*": ["api/*"]
     },
 
     /* Bundler mode */
