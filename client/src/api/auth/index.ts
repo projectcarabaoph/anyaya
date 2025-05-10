@@ -136,3 +136,29 @@ export const refreshToken = async () => {
         if (error instanceof Error) throw new Error(error.message);
     }
 }
+
+
+export const singOutUser = async (accessToken: string) => {
+    try {
+        const response = await fetch(serverPaths.auth.signout.user, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${accessToken}`
+            },
+            credentials: 'include'
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            const { message } = data
+            throw new Error(message)
+        }
+
+        return data
+    } catch (error) {
+        if (error instanceof Error) throw new Error(error.message);
+    }
+}
