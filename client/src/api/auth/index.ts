@@ -66,7 +66,7 @@ export const signInWithOauth = async (provider: string) => {
 }
 
 
-export const verifyOtpToken = async () => {
+export const verifyOtpToken = async (email: string, token: string) => {
     try {
         const response = await fetch(serverPaths.auth.signin.verify, {
             method: "POST",
@@ -74,7 +74,8 @@ export const verifyOtpToken = async () => {
                 "Content-Type": "application/json",
                 Accept: "application/json"
             },
-            credentials: 'include'
+            credentials: 'include',
+            body: JSON.stringify({ email, token })
         })
 
         const data = await response.json()
