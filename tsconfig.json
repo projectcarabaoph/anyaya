@@ -14,10 +14,12 @@
       "@controllers/*": ["controllers/*"],
       "@middlewares/*": ["middlewares/*"],
       "@routes/*": ["routes/*"],
-      "@types/*": ["types/*"],
       "@utils/*": ["utils/*"]
     },
-    "typeRoots": ["./node_modules/@types", "server/src/types"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "./server/src/types"  
+    ]
   },
-  "include": ["server/**/*"],
+  "include": ["server/**/*"]
 }

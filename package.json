@@ -48,7 +48,6 @@
     "@controllers": "dist/controllers",
     "@middlewares": "dist/middlewares",
     "@routes": "dist/routes",
-    "@types": "dist/types",
     "@utils": "dist/utils"
   }
 }
