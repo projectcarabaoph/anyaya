@@ -73,7 +73,34 @@ export const verifyOtpToken = async () => {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json"
-            }
+            },
+            credentials: 'include'
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            const { message } = data
+            throw new Error(message)
+        }
+
+        const { accessToken } = data
+        return { accessToken }
+    } catch (error) {
+        if (error instanceof Error) throw new Error(error.message);
+    }
+}
+
+
+export const callbackToken = async (code: string) => {
+    try {
+        const response = await fetch(serverPaths.auth.signin.callback, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({ code })
         })
 
         const data = await response.json()
