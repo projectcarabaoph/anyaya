@@ -4,7 +4,7 @@ import { Button } from "@components/ui/button";
 
 import { signInWithOauth } from "@api/auth";
 
-export default function SignInOauthCard() {
+export default function SignInWithOauthCard() {
 
 
     const handleSingInWithOauth = async (provider: string) => {
