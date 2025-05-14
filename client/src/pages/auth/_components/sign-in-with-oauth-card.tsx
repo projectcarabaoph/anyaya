@@ -19,7 +19,7 @@ export default function SignInWithOauthCard() {
     }
 
     return (
-        <form>
+        <div>
             <Button
                 variant='default'
                 type="button"
@@ -28,6 +28,6 @@ export default function SignInWithOauthCard() {
             >
                 Continue with Google
             </Button>
-        </form>
+        </div>
     )
 }
