@@ -94,7 +94,12 @@ export const verifyOtpToken = async (email: string, token: string) => {
 export const callbackToken = async (code: string) => {
     try {
         const response = await fetch(serverPaths.auth.signin.callback, {
-
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            credentials: 'include',
             body: JSON.stringify({ code })
         })
 
