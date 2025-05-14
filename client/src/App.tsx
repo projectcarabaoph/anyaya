@@ -17,6 +17,7 @@ import NotFoundPage from "@pages/not-found-page"
 
 // Routes
 import PrivateRoutes from "@routes/private-routes"
+import PublicRoutes from "@routes/public-routes"
 
 
 
@@ -25,9 +26,14 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
-        <Route path={clientPaths.auth.signin} element={<SignInPage />} />
-        <Route path={clientPaths.auth.callback} element={<CallbackPage />} />
+
+
+        <Route element={<PublicRoutes />} >
+          <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
+          <Route path={clientPaths.auth.signin} element={<SignInPage />} />
+          <Route path={clientPaths.auth.callback} element={<CallbackPage />} />
+        </Route>
+
 
         <Route path={clientPaths.home.dashboard} element={<PrivateRoutes />} >
           <Route index element={<DashboardPage />} />
