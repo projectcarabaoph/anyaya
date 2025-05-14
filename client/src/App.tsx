@@ -9,6 +9,9 @@ import LandingPage from "@pages/marketing/landing-page"
 import SignInPage from "@pages/auth/sign-in-page"
 import CallbackPage from "@pages/auth/callback-page"
 
+// Home
+import DashboardPage from "@pages/home/dashboard-page"
+
 // Common
 import NotFoundPage from "@pages/not-found-page"
 
@@ -26,8 +29,8 @@ function App() {
         <Route path={clientPaths.auth.signin} element={<SignInPage />} />
         <Route path={clientPaths.auth.callback} element={<CallbackPage />} />
 
-        <Route element={<PrivateRoutes />} >
-
+        <Route path={clientPaths.home.dashboard} element={<PrivateRoutes />} >
+          <Route index element={<DashboardPage />} />
         </Route>
 
 
