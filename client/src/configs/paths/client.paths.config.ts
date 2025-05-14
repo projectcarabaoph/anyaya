@@ -23,8 +23,8 @@ const clientPaths = schema.parse({
     auth: {
         signin: {
             oauth: "/auth/sign-in",
-            verify: "/auth/sign-in/verify",
-            callback: "/auth/sign-in/callback",
+            verify: "/auth/verify",
+            callback: "/auth/callback",
         },
     }
 } satisfies z.infer<typeof schema>)
