@@ -1,33 +1,27 @@
 import { refreshToken } from "@api/auth";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
-
 const useRefreshToken = () => {
+    const [accessToken, setAccessToken] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [accessToken, setAccessToken] = useState<string>("")
-
-    useEffect(() => {
-        const verifyRefreshToken = async () => {
-            try {
-                const response = await refreshToken()
-                setAccessToken(response?.accessToken)
-            } catch (error) {
-                if (error instanceof Error) toast.error(error.message || 'Refresh token failed.');
-            } finally {
-                setIsLoading(false)
-            }
-        }
-        if (!accessToken) {
-            verifyRefreshToken();
-        } else {
+    const postVerifyRefreshToken = useCallback(async () => {
+        try {
+            const response = await refreshToken();
+            setAccessToken(response?.accessToken);
+        } catch (error) {
+            if (error instanceof Error) toast.error(error.message);
+        } finally {
             setIsLoading(false);
         }
-    }, [accessToken])
+    }, []);
 
+    useEffect(() => {
+        postVerifyRefreshToken();
+    }, [postVerifyRefreshToken]);
 
-    return { accessToken, setAccessToken, isLoading, setIsLoading }
-}
+    return { accessToken, setAccessToken, isLoading, setIsLoading };
+};
 
-export default useRefreshToken
+export default useRefreshToken;
