@@ -11,6 +11,9 @@ const schema = z.object({
         verify: pathsSchema,
         callback: pathsSchema
 
+    }),
+    home: z.object({
+        dashboard: pathsSchema
     })
 })
 
@@ -23,6 +26,9 @@ const clientPaths = schema.parse({
         verify: "/auth/verify",
         callback: "/auth/callback",
 
+    },
+    home: {
+        dashboard: "/home"
     }
 } satisfies z.infer<typeof schema>)
 
