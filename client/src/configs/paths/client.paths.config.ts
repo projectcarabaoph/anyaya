@@ -7,25 +7,22 @@ const schema = z.object({
         landing: pathsSchema
     }),
     auth: z.object({
-        signin: z.object({
-            oauth: pathsSchema,
-            verify: pathsSchema,
-            callback: pathsSchema,
-        }),
+        signin: pathsSchema,
+        verify: pathsSchema,
+        callback: pathsSchema
+
     })
 })
-
 
 const clientPaths = schema.parse({
     marketing: {
         landing: "/"
     },
     auth: {
-        signin: {
-            oauth: "/auth/sign-in",
-            verify: "/auth/verify",
-            callback: "/auth/callback",
-        },
+        signin: "/auth/sign-in",
+        verify: "/auth/verify",
+        callback: "/auth/callback",
+
     }
 } satisfies z.infer<typeof schema>)
 

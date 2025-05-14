@@ -20,8 +20,8 @@ function App() {
     createRoutesFromElements(
       <Route>
         <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
-        <Route path={clientPaths.auth.signin.oauth} element={<SignInPage />} />
-        <Route path={clientPaths.auth.signin.callback} element={<CallbackPage />} />
+        <Route path={clientPaths.auth.signin} element={<SignInPage />} />
+        <Route path={clientPaths.auth.callback} element={<CallbackPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
