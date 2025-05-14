@@ -2,14 +2,14 @@ import { useCallback, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import useValidateCode from "@pages/auth/_hooks/use-validate-code"
-import useRefreshToken from "@hooks/auth/use-refresh-token"
+import useAuth from "@hooks/auth/use-auth"
 
 import { callbackToken } from "@api/auth"
 
 const CallbackPage = () => {
 
     const { data, error } = useValidateCode()
-    const { setAccessToken } = useRefreshToken()
+    const { setAccessToken } = useAuth()
     const navigate = useNavigate()
 
     if (error) navigate("*")
