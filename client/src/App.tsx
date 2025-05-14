@@ -10,6 +10,7 @@ import SignInPage from "@pages/auth/sign-in-page"
 
 // Common
 import NotFoundPage from "@pages/not-found-page"
+import CallbackPage from "@pages/auth/callback-page"
 
 
 
@@ -20,7 +21,7 @@ function App() {
       <Route>
         <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
         <Route path={clientPaths.auth.signin.oauth} element={<SignInPage />} />
-
+        <Route path={clientPaths.auth.signin.callback} element={<CallbackPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
