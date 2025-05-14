@@ -3,7 +3,7 @@ import { Button } from "@components/ui/button"
 const Sample = () => {
     return (
         <div>
-            <Button>Sample</Button>
+            <Button className="bg-red-500">Sample</Button>
         </div>
     )
 }
