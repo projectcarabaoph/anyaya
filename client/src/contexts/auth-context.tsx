@@ -14,7 +14,7 @@ export type TAuthProvider = {
     children: React.ReactNode
 }
 
-const AuthContext = createContext<TAuthContext | undefined>(undefined)
+const AuthContext = createContext<TAuthContext>({} as TAuthContext)
 
 
 export function AuthProvider({ children }: TAuthProvider) {
