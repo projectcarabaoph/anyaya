@@ -19,6 +19,8 @@ import NotFoundPage from "@pages/not-found-page"
 import PrivateRoutes from "@routes/private-routes"
 import PublicRoutes from "@routes/public-routes"
 
+// Layouts
+import MarketingLayout from "layout/marketing-layout"
 
 
 function App() {
@@ -29,9 +31,11 @@ function App() {
 
 
         <Route element={<PublicRoutes />} >
-          <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
-          <Route path={clientPaths.auth.signin} element={<SignInPage />} />
-          <Route path={clientPaths.auth.callback} element={<CallbackPage />} />
+          <Route element={<MarketingLayout />}>
+            <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
+            <Route path={clientPaths.auth.signin} element={<SignInPage />} />
+            <Route path={clientPaths.auth.callback} element={<CallbackPage />} />
+          </Route>
         </Route>
 
 
