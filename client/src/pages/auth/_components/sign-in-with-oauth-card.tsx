@@ -1,8 +1,8 @@
 import { toast } from "sonner";
 
-import { Button } from "@components/ui/button";
+import { Button } from "@/components/ui/button";
 
-import { signInWithOauth } from "@api/auth";
+import { signInWithOauth } from "@/api/auth";
 
 export default function SignInWithOauthCard() {
 

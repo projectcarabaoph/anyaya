@@ -5,7 +5,7 @@ import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
 import './index.css'
 import App from './App.tsx'
-import { AuthProvider } from '@contexts/auth-context.tsx';
+import { AuthProvider } from '@/contexts/auth-context.tsx';
 
 if (process.env.NODE_ENV === 'production') {
   disableReactDevTools();

@@ -1,5 +1,5 @@
-import clientPaths from '@configs/paths/client.paths.config';
-import type { TMarketingLayoutNavLinks } from '@utils/_types';
+import clientPaths from '@/configs/paths/client.paths.config';
+import type { TMarketingLayoutNavLinks } from '@/utils/_types';
 
 
 export const marketingLayoutNavLinks: TMarketingLayoutNavLinks[] = [

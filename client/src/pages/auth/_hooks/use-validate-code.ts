@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { codeSchema } from "@pages/auth/_libs/schemas";
+import { codeSchema } from "@/pages/auth/_libs/schemas";
 
 const useValidateCode = () => {
 

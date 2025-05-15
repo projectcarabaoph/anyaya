@@ -1,4 +1,4 @@
-import SignInWithOauthCard from "@pages/auth/_components/sign-in-with-oauth-card";
+import SignInWithOauthCard from "@/pages/auth/_components/sign-in-with-oauth-card";
 
 export default function SignInForm() {
 

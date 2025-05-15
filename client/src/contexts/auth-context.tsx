@@ -1,7 +1,7 @@
 import { createContext } from "react"
 import { Outlet } from 'react-router-dom'
 
-import useRefreshToken from "@hooks/auth/use-refresh-token"
+import useRefreshToken from "@/hooks/auth/use-refresh-token"
 
 
 export type TAuthContext = {

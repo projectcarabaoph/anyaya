@@ -11,7 +11,7 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 */
 
-import serverPaths from "@configs/paths/server.paths.config"
+import serverPaths from "@/configs/paths/server.paths.config"
 
 
 export const signInWithEmail = async (email: string) => {

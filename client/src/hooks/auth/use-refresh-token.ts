@@ -1,4 +1,4 @@
-import { refreshToken } from "@api/auth";
+import { refreshToken } from "@/api/auth";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 

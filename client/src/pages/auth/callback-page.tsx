@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import useValidateCode from "@pages/auth/_hooks/use-validate-code"
-import useAuth from "@hooks/auth/use-auth"
+import useValidateCode from "@/pages/auth/_hooks/use-validate-code"
+import useAuth from "@/hooks/auth/use-auth"
 
-import { callbackToken } from "@api/auth"
+import { callbackToken } from "@/api/auth"
 
 const CallbackPage = () => {
 

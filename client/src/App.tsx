@@ -1,26 +1,26 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 
-import clientPaths from "@configs/paths/client.paths.config"
+import clientPaths from "@/configs/paths/client.paths.config"
 
 // Marketing
-import LandingPage from "@pages/marketing/landing-page"
+import LandingPage from "@/pages/marketing/landing-page"
 
 // Auth
-import SignInPage from "@pages/auth/sign-in-page"
-import CallbackPage from "@pages/auth/callback-page"
+import SignInPage from "@/pages/auth/sign-in-page"
+import CallbackPage from "@/pages/auth/callback-page"
 
 // Home
-import DashboardPage from "@pages/home/dashboard-page"
+import DashboardPage from "@/pages/home/dashboard-page"
 
 // Common
-import NotFoundPage from "@pages/not-found-page"
+import NotFoundPage from "@/pages/not-found-page"
 
 // Routes
-import PrivateRoutes from "@routes/private-routes"
-import PublicRoutes from "@routes/public-routes"
+import PrivateRoutes from "@/routes/private-routes"
+import PublicRoutes from "@/routes/public-routes"
 
 // Layouts
-import MarketingLayout from "@layouts/marketing-layout"
+import MarketingLayout from "@/layouts/marketing-layout"
 
 function App() {
 

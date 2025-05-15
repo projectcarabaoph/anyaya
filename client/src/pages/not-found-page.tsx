@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 
-import clientPaths from "@configs/paths/client.paths.config"
+import clientPaths from "@/configs/paths/client.paths.config"
 
 const NotFoundPage = () => {
     return (

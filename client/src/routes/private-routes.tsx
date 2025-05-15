@@ -1,6 +1,7 @@
-import clientPaths from "@configs/paths/client.paths.config"
-import useAuth from "@hooks/auth/use-auth"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
+
+import clientPaths from "@/configs/paths/client.paths.config"
+import useAuth from "@/hooks/auth/use-auth"
 
 const PrivateRoutes = () => {
     const { accessToken } = useAuth()

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
-import ListComponent from "@components/shared/list-component";
-import { marketingLayoutNavLinks } from "@utils/constants";
+import ListComponent from "@/components/shared/list-component";
+import { marketingLayoutNavLinks } from "@/utils/constants";
 
 export default function MarketingLayoutNavigation() {
     return (
