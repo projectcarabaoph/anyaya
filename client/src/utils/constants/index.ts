@@ -9,7 +9,7 @@ export const marketingLayoutNavLinks: TMarketingLayoutNavLinks[] = [
         path: clientPaths.marketing.landing
     },
     {
-        id: 1,
+        id: 2,
         name: "Sign In",
         path: clientPaths.auth.signin
     },
