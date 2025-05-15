@@ -8,17 +8,19 @@
     "skipLibCheck": true,
 
         /* Dont put this anywhere except here */
-    "baseUrl": "./src",
+     "baseUrl": "./src",
      "paths": {
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@configs/*": ["configs/*"],
       "@contexts/*": ["contexts/*"],
       "@hooks/*": ["hooks/*"],
+      "@layouts/*": ["layouts/*"],
       "@pages/*": ["pages/*"],
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"],
-      "@api/*": ["api/*"]
+      "@types/*": ["types/*"]
     },
 
     /* Bundler mode */
