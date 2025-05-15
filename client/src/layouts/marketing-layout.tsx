@@ -3,11 +3,11 @@ import MarketingLayoutNavigation from "@layouts/_components/marketing-layout-nav
 
 const MarketingLayout = () => {
     return (
-        <div>
-            <header>
+        <div className='grid w-full min-h-dvh h-auto grid-cols-1 grid-rows-[64px_1fr]'>
+            <header className="bg-green-300">
                 <MarketingLayoutNavigation />
             </header>
-            <main>
+            <main className="flex flex-col min-h-[calc(100dvh-64px)] justify-center items-center ">
                 <Outlet />
             </main>
         </div>

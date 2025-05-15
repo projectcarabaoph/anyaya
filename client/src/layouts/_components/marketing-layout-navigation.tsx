@@ -5,10 +5,10 @@ import { marketingLayoutNavLinks } from "@utils/constants";
 
 export default function MarketingLayoutNavigation() {
     return (
-        <nav>
+        <nav className="w-full ">
             <ListComponent
                 as='ul'
-                className="bg-black p-0 flex flex-col gap-2"
+                className="p-0 flex flex-row gap-2 h-full"
                 data={marketingLayoutNavLinks}
                 renderItem={(link) => (
                     <li key={link.id}>
