@@ -1,21 +1,19 @@
-import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
-import { singOutUser } from "@/api/auth"
-import clientPaths from "@/configs/paths/client.paths.config"
-import useAuth from "@/hooks/auth/use-auth"
 import { Button } from "@/components/ui/button"
+
+import { singOutUser } from "@/api/auth"
+import useAuth from "@/hooks/auth/use-auth"
 
 const DashboardPage = () => {
 
-    const { accessToken } = useAuth()
-    const navigate = useNavigate()
+    const { accessToken, setAccessToken } = useAuth()
 
     const handleSignOut = async (accessToken: string) => {
         try {
             await singOutUser(accessToken)
             toast.success('Signed out successfully.');
-            navigate(clientPaths.marketing.landing)
+            setAccessToken('')
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
         }
