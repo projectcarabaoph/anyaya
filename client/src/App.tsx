@@ -20,8 +20,7 @@ import PrivateRoutes from "@routes/private-routes"
 import PublicRoutes from "@routes/public-routes"
 
 // Layouts
-import MarketingLayout from "layout/marketing-layout"
-
+import MarketingLayout from "@layouts/marketing-layout"
 
 function App() {
 
