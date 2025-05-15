@@ -1,9 +1,15 @@
 import { Outlet } from "react-router-dom"
+import MarketingLayoutNavigation from "./_components/marketing-layout-navigation"
 
 const MarketingLayout = () => {
     return (
         <div>
-            <Outlet />
+            <header>
+                <MarketingLayoutNavigation />
+            </header>
+            <main>
+                <Outlet />
+            </main>
         </div>
     )
 }
