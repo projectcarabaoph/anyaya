@@ -1,40 +1,13 @@
-import { useCallback, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 
 import useValidateCode from "@/pages/auth/_hooks/use-validate-code"
-import useAuth from "@/hooks/auth/use-auth"
 
-import { callbackToken } from "@/api/auth"
 
 const CallbackPage = () => {
-
-    const { data, error } = useValidateCode()
-    const { setAccessToken } = useAuth()
-    const navigate = useNavigate()
-
-    if (error) navigate("*")
-
-
-    const postSignInWithOauth = useCallback(async () => {
-        try {
-            const response = await callbackToken(data?.code as string)
-
-            const { accessToken } = response
-            setAccessToken(accessToken)
-
-        } catch (error) {
-            if (error instanceof Error) navigate('*')
-        }
-    }, [data?.code, setAccessToken, navigate])
-
-
-    useEffect(() => {
-        postSignInWithOauth()
-    }, [postSignInWithOauth])
+    useValidateCode()
 
     return (
-        <div>
-
+        <div className="h-full w-full flex flex-col items-center justify-center">
+            <p>Signing in...</p>
         </div>
     )
 }
