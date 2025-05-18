@@ -29,4 +29,11 @@ export const createProjectSchema = z.object({
         .min(6, { message: "Name must be at least 6 characters." })
         .max(20, { message: "Name must be less than 20 characters." })
         .trim(),
+    description: z
+        .string({
+            required_error: "Description is a required field.",
+        })
+        .min(10, { message: "Description must be at least 10 characters." })
+        .max(200, { message: "Description must be less than 200 characters." })
+        .trim()
 })
