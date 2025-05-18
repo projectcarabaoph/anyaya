@@ -10,9 +10,10 @@ import dotenv from 'dotenv'
 
 // routes
 import authRoutes from '@routes/auth-routes'
+import projectRoutes from '@routes/project-routes'
+
 
 dotenv.config()
-
 const { NODE_PORT, NODE_PUBLIC_DEV_BASE_URL } = process.env
 
 const corsOptions: CorsOptions = {
@@ -40,6 +41,8 @@ app.use(cookieParser());
 // app.use(limiter);
 
 app.use('/api/auth', authRoutes)
+app.use('/api/project', projectRoutes)
+
 
 
 app.get('/', (req, res) => {
