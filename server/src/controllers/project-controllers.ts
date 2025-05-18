@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { serverClient } from "@configs/supabase/server-client";
 import ApiError from "@utils/misc/api-error";
 import errorHandler from "@utils/misc/error-handler";
-import { createProjectSchema } from "@utils/schemas";
+import { createProjectSchema, updateProjectByIdSchema } from "@utils/schemas";
 
 export const createProject = async (req: Request, res: Response) => {
     try {
@@ -29,3 +29,34 @@ export const createProject = async (req: Request, res: Response) => {
     }
 
 }
+
+
+export const updateProjectById = async (req: Request, res: Response) => {
+    try {
+        const result = updateProjectByIdSchema.safeParse(req.body)
+
+        if (!result.success) throw new ApiError(result.error.errors[0].message, 400)
+
+        const supabase = serverClient(req, res)
+
+        const { name, description, id } = result.data
+
+        const { data, error } = await supabase
+            .from('projects')
+            .update({
+                name,
+                description,
+            })
+            .eq('owner_id', req.user?.id)
+            .eq('id', id)
+            .select('*')
+            .single()
+
+        if (error) throw new ApiError(error.message, 400)
+
+        res.status(200).json({ data })
+    } catch (error) {
+        errorHandler(error, req, res)
+        return
+    }
+} 
