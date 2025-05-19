@@ -70,7 +70,7 @@ export const deleteProjectByIdSchema = z.object({
 })
 
 
-export const getProjectById = z.object({
+export const getProjectByIdSchema = z.object({
     id: z
         .union([
             z.string().uuid({ message: "Invalid ID" }),
