@@ -8,8 +8,8 @@ const router: Router = express.Router();
 router.post('/create', authMiddleware, createProject)
 router.post('/update', authMiddleware, updateProjectById)
 router.post('/delete', authMiddleware, deleteProjectById)
-router.post('/all', authMiddleware, getAllProjects)
-router.post('/:id', authMiddleware, getProjectById)
+router.post('/get/all', authMiddleware, getAllProjects)
+router.post('/get/:id', authMiddleware, getProjectById)
 
 
 export default router
