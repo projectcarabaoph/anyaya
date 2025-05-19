@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { serverClient } from "@configs/supabase/server-client";
 import ApiError from "@utils/misc/api-error";
 import errorHandler from "@utils/misc/error-handler";
-import { createProjectSchema, deleteProjectByIdSchema, updateProjectByIdSchema } from "@utils/schemas";
+import { createProjectSchema, deleteProjectByIdSchema, getProjectByIdSchema, updateProjectByIdSchema } from "@utils/schemas";
 
 export const createProject = async (req: Request, res: Response) => {
     try {
@@ -109,6 +109,33 @@ export const getAllProjects = async (req: Request, res: Response) => {
     } catch (error) {
         errorHandler(error, req, res)
         return
+    }
+
+}
+
+
+export const getProjectById = async (req: Request, res: Response) => {
+    try {
+        const result = getProjectByIdSchema.safeParse(req.params.id)
+
+        if (!result.success) throw new ApiError(result.error.errors[0].message, 400)
+
+        const supabase = serverClient(req, res)
+
+        const { id } = result.data
+
+        const { data, error } = await supabase
+            .from('projects')
+            .select('*')
+            .eq('id', id)
+            .eq('owner_id', req.user?.id)
+            .eq('is_deleted', false)
+
+        if (error) throw new ApiError(error.message, 400)
+
+        res.status(200).json({ data })
+    } catch (error) {
+
     }
 
 }
