@@ -116,7 +116,7 @@ export const getAllProjects = async (req: Request, res: Response) => {
 
 export const getProjectById = async (req: Request, res: Response) => {
     try {
-        const result = getProjectByIdSchema.safeParse(req.params.id)
+        const result = getProjectByIdSchema.safeParse(req.params)
 
         if (!result.success) throw new ApiError(result.error.errors[0].message, 400)
 
