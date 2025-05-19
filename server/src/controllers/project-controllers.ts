@@ -14,13 +14,31 @@ export const createProject = async (req: Request, res: Response) => {
 
         const supabase = serverClient(req, res)
 
-        const { data, error } = await supabase
+        const { data: projectData, error: projectError } = await supabase
             .from('projects')
             .insert(result.data)
             .select('*')
-            .single()
+            .single<TProject>()
 
-        if (error) throw new ApiError(error.message, 400)
+
+        if (projectError) throw new ApiError(projectError.message, 400)
+
+        const { data: memberData, error: memberError } = await supabase
+            .from('project_memberships')
+            .insert({
+                profile_id: projectData.owner_id,
+                project_id: projectData?.id,
+                role: "admin",
+            })
+            .select('*')
+            .single<TProjectMember>()
+
+        if (memberError) throw new ApiError(memberError.message, 400)
+
+        const data = {
+            ...projectData,
+            ...memberData
+        }
 
         res.status(200).json({ data })
     } catch (error) {
