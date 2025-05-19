@@ -135,7 +135,8 @@ export const getProjectById = async (req: Request, res: Response) => {
 
         res.status(200).json({ data })
     } catch (error) {
-
+        errorHandler(error, req, res)
+        return
     }
 
 }
