@@ -33,7 +33,10 @@ export const createProject = async (req: Request, res: Response) => {
 
 export const updateProjectById = async (req: Request, res: Response) => {
     try {
-        const result = updateProjectByIdSchema.safeParse(req.body)
+        const result = updateProjectByIdSchema.safeParse({
+            ...req.params,
+            ...req.body
+        })
 
         if (!result.success) throw new ApiError(result.error.errors[0].message, 400)
 
