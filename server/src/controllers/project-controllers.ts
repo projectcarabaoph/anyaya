@@ -82,6 +82,8 @@ export const deleteProjectById = async (req: Request, res: Response) => {
             })
             .eq('owner_id', req.user?.id)
             .eq('id', id)
+            .select('*')
+            .single();
 
 
         if (error) throw new ApiError(error.message, 400)
