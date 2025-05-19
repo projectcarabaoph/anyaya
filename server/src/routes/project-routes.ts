@@ -1,10 +1,12 @@
 import express, { Router } from 'express';
 
-import { createProject, updateProjectById } from '@controllers/project-controllers';
 import { authMiddleware } from '@middlewares/auth-middleware';
+import { createProject, deleteProjectById, updateProjectById } from '@controllers/project-controllers';
 
 const router: Router = express.Router();
 
 router.post('/create', authMiddleware, createProject)
 router.post('/update', authMiddleware, updateProjectById)
+router.post('/delete', authMiddleware, deleteProjectById)
+
 export default router
