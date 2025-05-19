@@ -7,7 +7,7 @@ const router: Router = express.Router();
 
 router.post('/create', authMiddleware, createProject)
 router.put('/update/:id', authMiddleware, updateProjectById)
-router.post('/delete/:id', authMiddleware, deleteProjectById)
+router.delete('/delete/:id', authMiddleware, deleteProjectById)
 router.post('/get/all', authMiddleware, getAllProjects)
 router.post('/get/:id', authMiddleware, getProjectById)
 
