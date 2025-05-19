@@ -91,3 +91,24 @@ export const deleteProjectById = async (req: Request, res: Response) => {
 }
 
 
+export const getAllProjects = async (req: Request, res: Response) => {
+
+    try {
+        const supabase = serverClient(req, res)
+
+        const { data, error } = await supabase
+            .from('projects')
+            .select('*')
+            .eq('owner_id', req.user?.id)
+            .eq('is_deleted', false)
+
+        if (error) throw new ApiError(error.message, 400)
+
+        res.status(200).json({ data })
+
+    } catch (error) {
+        errorHandler(error, req, res)
+        return
+    }
+
+}
