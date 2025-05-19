@@ -68,3 +68,12 @@ export const deleteProjectByIdSchema = z.object({
             z.string().min(1, { message: "ID is a required field." })
         ])
 })
+
+
+export const getProjectById = z.object({
+    id: z
+        .union([
+            z.string().uuid({ message: "Invalid ID" }),
+            z.string().min(1, { message: "ID is a required field." })
+        ])
+})
