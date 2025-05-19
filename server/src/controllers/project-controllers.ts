@@ -64,7 +64,7 @@ export const updateProjectById = async (req: Request, res: Response) => {
 
 export const deleteProjectById = async (req: Request, res: Response) => {
     try {
-        const result = deleteProjectByIdSchema.safeParse(req.body)
+        const result = deleteProjectByIdSchema.safeParse(req.params)
 
         if (!result.success) throw new ApiError(result.error.errors[0].message, 400)
 
