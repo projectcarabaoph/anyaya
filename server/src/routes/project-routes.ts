@@ -1,15 +1,25 @@
 import express, { Router } from 'express';
 
 import { authMiddleware } from '@middlewares/auth-middleware';
-import { createProject, deleteProjectById, getAllProjects, getProjectById, updateProjectById } from '@controllers/project-controllers';
+
+import {
+    createProject,
+    deleteProjectById,
+    getAllProjects,
+    getProjectById,
+    updateProjectById
+} from '@controllers/project-controllers';
 
 const router: Router = express.Router();
 
-router.post('/create', authMiddleware, createProject)
-router.put('/update/:id', authMiddleware, updateProjectById)
-router.delete('/delete/:id', authMiddleware, deleteProjectById)
-router.post('/get/all', authMiddleware, getAllProjects)
-router.post('/get/:id', authMiddleware, getProjectById)
+router.route("/")
+    .post(authMiddleware, createProject)
+    .get(authMiddleware, getAllProjects);
+
+router.route("/:id")
+    .get(authMiddleware, getProjectById)
+    .put(authMiddleware, updateProjectById)
+    .delete(authMiddleware, deleteProjectById)
 
 
 export default router
