@@ -23,7 +23,7 @@ export const createProject = async (req: Request, res: Response) => {
                 owner_id: req.user?.id
             })
             .select('*')
-            .single<TProject>()
+            .single<TProjects>()
 
         if (projectError) throw new ApiError(projectError.message, 400)
 
@@ -35,7 +35,7 @@ export const createProject = async (req: Request, res: Response) => {
                 role: "admin",
             })
             .select('*')
-            .single<TProjectMember>()
+            .single<TProjectMemberships>()
 
         if (memberError) {
             await supabase
@@ -165,6 +165,7 @@ export const getProjectById = async (req: Request, res: Response) => {
             .eq('id', id)
             .eq('owner_id', req.user?.id)
             .eq('is_deleted', false)
+            .single<IProjectDetails>()
 
         if (error) throw new ApiError(error.message, 400)
 

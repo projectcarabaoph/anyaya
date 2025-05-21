@@ -6,17 +6,23 @@ type TProfiles = {
     avatar_url: string
 }
 
-type TProject = {
-    id: string,
-    name: string,
-    description: string,
-    owner_id: string,
+type TProjects = {
+    id: string
+    name: string
+    description: string
+    owner_id: string
+    is_deleted: boolean
     created_at: string
 }
 
-type TProjectMember = {
-    profile_id: string,
-    project_id: string,
-    role: string,
+type TProjectMemberships = {
+    profile_id: string
+    project_id: string
+    role: string
     added_at: string
+}
+
+
+interface IProjectDetails extends TProjects {
+    project_memberships: TProjectMemberships;
 }
