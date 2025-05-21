@@ -161,7 +161,7 @@ export const getProjectById = async (req: Request, res: Response) => {
 
         const { data, error } = await supabase
             .from('projects')
-            .select('*')
+            .select('*, project_memberships(*)')
             .eq('id', id)
             .eq('owner_id', req.user?.id)
             .eq('is_deleted', false)
