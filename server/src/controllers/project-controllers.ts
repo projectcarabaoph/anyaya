@@ -105,16 +105,28 @@ export const deleteProjectById = async (req: Request, res: Response) => {
 
         const { id } = result.data
 
+
+        const { data: memberData, error: memberError } = await supabase
+            .from('project_memberships')
+            .select('*')
+            .eq('profile_id', req.user?.id)
+            .eq('project_id', id)
+            .single<TProjectMemberships>();
+
+        if (memberError || !memberData) throw new ApiError(memberError?.message || 'Membership not found', 400);
+
+        if (memberData.role !== 'admin') throw new ApiError('Forbidden.', 403);
+
+
         const { data, error } = await supabase
             .from('projects')
             .update({
                 is_deleted: true
             })
-            .eq('owner_id', req.user?.id)
-            .eq('id', id)
+            .eq('owner_id', memberData?.profile_id)
+            .eq('id', memberData?.project_id)
             .select('*')
             .single();
-
 
         if (error) throw new ApiError(error.message, 400)
 
