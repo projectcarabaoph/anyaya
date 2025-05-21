@@ -12,14 +12,18 @@ export const createProject = async (req: Request, res: Response) => {
 
         if (!result.success) throw new ApiError(result.error.errors[0].message, 400);
 
+        const { name, description } = result.data
         const supabase = serverClient(req, res)
 
         const { data: projectData, error: projectError } = await supabase
             .from('projects')
-            .insert(result.data)
+            .insert({
+                name,
+                description,
+                owner_id: req.user?.id
+            })
             .select('*')
             .single<TProject>()
-
 
         if (projectError) throw new ApiError(projectError.message, 400)
 
@@ -33,7 +37,15 @@ export const createProject = async (req: Request, res: Response) => {
             .select('*')
             .single<TProjectMember>()
 
-        if (memberError) throw new ApiError(memberError.message, 400)
+        if (memberError) {
+            await supabase
+                .from('projects')
+                .delete()
+                .eq('profile_id', projectData?.owner_id)
+                .eq('project_id', projectData?.id)
+
+            throw new ApiError(memberError.message, 400)
+        }
 
         const data = {
             ...projectData,
