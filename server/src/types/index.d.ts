@@ -24,5 +24,5 @@ type TProjectMemberships = {
 
 
 interface IProjectDetails extends TProjects {
-    project_memberships: TProjectMemberships;
+    project_memberships: TProjectMemberships[];
 }
