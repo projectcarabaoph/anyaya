@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 
-import { authMiddleware } from '@middlewares/auth-middleware';
+import { authMiddleware } from '@/middlewares/auth-middleware';
 
 import {
     createProject,
@@ -8,7 +8,7 @@ import {
     getAllProjects,
     getProjectById,
     updateProjectById
-} from '@controllers/project-controllers';
+} from '@/controllers/project-controllers';
 
 const router: Router = express.Router();
 

@@ -1,4 +1,4 @@
-import { serverClient } from '@configs/supabase/server-client'
+import { serverClient } from '@/configs/supabase/server-client'
 import { Request, Response, NextFunction } from 'express'
 
 const checkRequestHeader = (req: Request): string => {

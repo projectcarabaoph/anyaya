@@ -1,10 +1,10 @@
 
 import { Request, Response } from "express";
 
-import { serverClient } from "@configs/supabase/server-client";
-import ApiError from "@utils/misc/api-error";
-import errorHandler from "@utils/misc/error-handler";
-import { createProjectSchema, deleteProjectByIdSchema, getProjectByIdSchema, updateProjectByIdSchema } from "@utils/schemas";
+import { serverClient } from "@/configs/supabase/server-client";
+import ApiError from "@/utils/misc/api-error";
+import errorHandler from "@/utils/misc/error-handler";
+import { createProjectSchema, deleteProjectByIdSchema, getProjectByIdSchema, updateProjectByIdSchema } from "@/utils/schemas";
 
 export const createProject = async (req: Request, res: Response) => {
     try {

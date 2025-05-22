@@ -46,10 +46,10 @@
     "typescript": "^5.8.3"
   },
   "_moduleAliases": {
-    "@configs": "dist/configs",
-    "@controllers": "dist/controllers",
-    "@middlewares": "dist/middlewares",
-    "@routes": "dist/routes",
-    "@utils": "dist/utils"
+    "@/configs": "dist/configs",
+    "@/controllers": "dist/controllers",
+    "@/middlewares": "dist/middlewares",
+    "@/routes": "dist/routes",
+    "@/utils": "dist/utils"
   }
 }

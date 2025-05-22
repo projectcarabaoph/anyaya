@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { createServerClient } from '@supabase/ssr';
 
-import { clientKeys } from '@utils/supabase/client-keys';
+import { clientKeys } from '@/utils/supabase/client-keys';
 
 export function serverClient(
     request: Request,

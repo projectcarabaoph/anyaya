@@ -9,8 +9,8 @@ import dotenv from 'dotenv'
 
 
 // routes
-import authRoutes from '@routes/auth-routes'
-import projectRoutes from '@routes/project-routes'
+import authRoutes from '@/routes/auth-routes'
+import projectRoutes from '@/routes/project-routes'
 
 
 dotenv.config()

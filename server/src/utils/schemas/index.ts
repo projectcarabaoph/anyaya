@@ -1,4 +1,4 @@
-import { enumsOauthProvider } from '@utils/enums';
+import { enumsOauthProvider } from '@/utils/enums';
 import { z } from 'zod';
 
 export const signInWithEmailSchema = z.object({

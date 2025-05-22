@@ -10,11 +10,11 @@
     "skipLibCheck": true,
     "baseUrl": "server/src",
     "paths": {
-      "@configs/*": ["configs/*"],
-      "@controllers/*": ["controllers/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"]
+      "@/configs/*": ["configs/*"],
+      "@/controllers/*": ["controllers/*"],
+      "@/middlewares/*": ["middlewares/*"],
+      "@/routes/*": ["routes/*"],
+      "@/utils/*": ["utils/*"]
     },
     "typeRoots": [
       "./node_modules/@types",

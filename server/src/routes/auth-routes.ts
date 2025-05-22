@@ -7,7 +7,7 @@ import {
     callbackToken,
     refreshToken,
     signOut
-} from '@controllers/auth-controllers'
+} from '@/controllers/auth-controllers'
 
 const router: Router = express.Router();
 

@@ -1,17 +1,17 @@
 import { Request, Response } from "express"
 
-import { browserClient } from "@configs/supabase/browser-client"
-import { serverClient } from "@configs/supabase/server-client"
+import { browserClient } from "@/configs/supabase/browser-client"
+import { serverClient } from "@/configs/supabase/server-client"
 
 import {
     callbackTokenSchema,
     signInWithEmailSchema,
     signInWithOauthSchema,
     verifyOtpTokenSchema
-} from "@utils/schemas"
+} from "@/utils/schemas"
 
-import errorHandler from "@utils/misc/error-handler"
-import ApiError from "@utils/misc/api-error"
+import errorHandler from "@/utils/misc/error-handler"
+import ApiError from "@/utils/misc/api-error"
 
 
 export const signInWithEmail = async (req: Request, res: Response) => {
