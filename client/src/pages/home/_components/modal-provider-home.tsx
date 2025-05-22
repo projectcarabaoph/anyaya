@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function HomeModalProvider() {
+export default function ModalProviderHome() {
     const [isMounted, setIsMounted] = useState<boolean>(false)
 
     useEffect(() => {
