@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import HomeModalProvider from "@/pages/home/_components/home-modal-provider"
+import HomeModalProvider from "@/layouts/_components/home-modal-provider"
 
 const HomeLayout = () => {
     return (
