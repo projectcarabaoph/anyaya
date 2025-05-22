@@ -21,6 +21,7 @@ import PublicRoutes from "@/routes/public-routes"
 
 // Layouts
 import MarketingLayout from "@/layouts/marketing-layout"
+import HomeLayout from "@/layouts/home-layout"
 
 function App() {
 
@@ -39,7 +40,10 @@ function App() {
 
 
         <Route path={clientPaths.home.dashboard} element={<PrivateRoutes />} >
-          <Route index element={<DashboardPage />} />
+          <Route element={<HomeLayout />}>
+            <Route index element={<DashboardPage />} />
+          </Route>
+
         </Route>
 
 
