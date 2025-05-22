@@ -3,7 +3,6 @@ import { toast } from "sonner"
 
 import useAuth from "@/hooks/auth/use-auth"
 import { getProfile } from "@/api/home/profile"
-import type { TProfiles } from "@/hooks/_types"
 
 const useProfile = () => {
 
