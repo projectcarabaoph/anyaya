@@ -10,6 +10,7 @@ import dotenv from 'dotenv'
 
 // routes
 import authRoutes from '@/routes/auth-routes'
+import profileRoutes from '@/routes/profile-routes'
 import projectRoutes from '@/routes/project-routes'
 
 
@@ -41,6 +42,7 @@ app.use(cookieParser());
 // app.use(limiter);
 
 app.use('/api/auth', authRoutes)
+app.use('/api/profile', profileRoutes)
 app.use('/api/project', projectRoutes)
 
 
