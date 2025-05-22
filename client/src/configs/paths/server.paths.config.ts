@@ -14,6 +14,11 @@ const schema = z.object({
         signout: z.object({
             user: pathsSchema,
         })
+    }),
+    home: z.object({
+        profile: z.object({
+            main: pathsSchema
+        })
     })
 })
 
@@ -28,6 +33,12 @@ const serverPaths = schema.parse({
         },
         signout: {
             user: "/api/auth/sign-out"
+        },
+
+    },
+    home: {
+        profile: {
+            main: "/api/profile"
         }
     }
 } satisfies z.infer<typeof schema>)
