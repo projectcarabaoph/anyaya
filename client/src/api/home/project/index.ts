@@ -87,9 +87,33 @@ export const getProjectById = async (id: string, accessToken: string) => {
 
     return data?.data
   } catch (error) {
-
     if (error instanceof Error) throw new Error(error.message)
-
   }
 
+}
+
+
+
+export const deleteProjectById = async (id: string, accessToken: string) => {
+  try {
+    const response = await fetch(serverPaths.home.project.delete.replace(":id", id), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      const { message } = data
+      throw new Error(message)
+    }
+
+    return data?.data
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message)
+  }
 }
