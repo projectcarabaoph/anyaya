@@ -7,8 +7,8 @@ export type TProjectModal = "deleteProjectModal";
 
 export interface IProjectModalStore {
     type: TProjectModal | null;
-    data?: TProfiles;
+    data?: IProjectDetails;
     isOpen: boolean;
-    onOpen: (type: TProjectModal, data?: TProfiles) => void;
+    onOpen: (type: TProjectModal, data?: IProjectDetails) => void;
     onClose: () => void;
 }
