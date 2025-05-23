@@ -6,7 +6,7 @@ import { getAllProjects } from "@/api/home/project"
 
 const useProjects = () => {
 
-    const [projects, setProjects] = useState<TProjects | null>(null)
+    const [projects, setProjects] = useState<TProjects[] | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const { accessToken } = useAuth()
