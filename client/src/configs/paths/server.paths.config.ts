@@ -18,7 +18,14 @@ const schema = z.object({
     home: z.object({
         profile: z.object({
             main: pathsSchema
-        })
+        }),
+        project: z.object({
+            all: pathsSchema,
+            create: pathsSchema,
+            id: pathsSchema,
+            update: pathsSchema,
+            delete: pathsSchema
+        }),
     })
 })
 
@@ -34,12 +41,18 @@ const serverPaths = schema.parse({
         signout: {
             user: "/api/auth/sign-out"
         },
-
     },
     home: {
         profile: {
             main: "/api/profile"
-        }
+        },
+        project: {
+            all: "/api/project",
+            create: "/api/project",
+            id: "/api/project/:id",
+            update: "/api/project/:id",
+            delete: "/api/project/:id"
+        },
     }
 } satisfies z.infer<typeof schema>)
 
