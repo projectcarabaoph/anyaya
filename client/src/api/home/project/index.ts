@@ -41,3 +41,28 @@ export const createProject = async (formData: FormData, accessToken: string) => 
     if (error instanceof Error) throw new Error(error.message)
   }
 };
+
+
+export const allProjects = async (accessToken: string) => {
+  try {
+    const response = await fetch(serverPaths.home.project.all, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`
+      },
+    })
+    const data = await response.json()
+
+    if (!response.ok) {
+      const { message } = data
+      throw new Error(message)
+    }
+
+    return data?.data
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message)
+  }
+
+}
