@@ -9,7 +9,7 @@ export default function ListComponent<T>({
 }: TListComponent<T>) {
     return (
         <Component className={className}>
-            {data.length > 0
+            {data?.length > 0
                 ? data.map((item, index) => renderItem(item, index))
                 : empty ?? null}
         </Component>
