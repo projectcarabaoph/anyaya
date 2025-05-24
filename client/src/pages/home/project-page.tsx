@@ -1,7 +1,3 @@
-
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "sonner";
 import { format } from 'date-fns'
 
 import ListComponent from "@/components/shared/list-component";
@@ -11,73 +7,46 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-import { getProjectById } from "@/api/home/project";
-import useAuth from "@/hooks/auth/use-auth";
+import useProjectById from "@/hooks/home/use-project-by-id";
 import avatarInitials from "@/utils/avatar-initials";
-
-
 
 const ProjectPage = () => {
 
-    const [project, setProject] = useState<IProjectDetailWithMembership | null>(null)
-
-    const { id } = useParams<TParams>();
-    const { accessToken } = useAuth();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!id) {
-            navigate("*");
-            return;
-        }
-
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        const fetchProjectById = async () => {
-            try {
-                const response = await getProjectById(id, accessToken, signal);
-                setProject(response)
-            } catch (error) {
-                if (error instanceof Error) toast.error(error.message)
-            }
-        };
-
-        fetchProjectById();
-
-        return () => controller.abort();
-    }, [id, accessToken, navigate]);
+    const { isLoading, project } = useProjectById()
 
     const formatDate = project?.created_at ? format(new Date(project?.created_at as string), 'MMM dd yyyy') : ""
 
     return (
         <div className="h-full w-full flex flex-col gap-2 bg-orange-200 p-2">
-            <div className="flex flex-col gap-2">
-                <span>{project?.name}</span>
-                <span>{project?.description}</span>
-                <span>{formatDate}</span>
-                <span className="font-bold">Members:</span>
-                <ListComponent
-                    data={project?.project_memberships as TProjectMembershipProfile[]}
-                    as="ul"
-                    renderItem={(member) => (
-                        <li className="flex flex-row gap-2 border border-black p-2" key={member.added_at}>
-                            <Avatar title={`${member.profiles?.full_name}'s avatar`}>
-                                <AvatarImage
-                                    src={member?.profiles?.avatar_url as string}
-                                    alt={`${member?.profiles?.full_name}'s avatar`}
-                                />
-                                <AvatarFallback>{avatarInitials(member?.profiles?.full_name)}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col">
-                                <span className="font-medium">{member?.profiles?.full_name}</span>
-                                <span>{member?.role}</span>
-                            </div>
-                        </li>
-                    )}
-                >
-                </ListComponent>
-            </div>
+            {isLoading ? (
+                <span>loading</span>
+            ) : (
+                <div className="flex flex-col gap-2">
+                    <span>{project?.name}</span>
+                    <span>{project?.description}</span>
+                    <span>{formatDate}</span>
+                    <ListComponent
+                        data={project?.project_memberships as TProjectMembershipProfile[]}
+                        as="ul"
+                        renderItem={(member) => (
+                            <li className="flex flex-row gap-2 border border-black p-2" key={member.added_at}>
+                                <Avatar title={`${member.profiles?.full_name}'s avatar`}>
+                                    <AvatarImage
+                                        src={member?.profiles?.avatar_url as string}
+                                        alt={`${member?.profiles?.full_name}'s avatar`}
+                                    />
+                                    <AvatarFallback>{avatarInitials(member?.profiles?.full_name)}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex flex-col">
+                                    <span className="font-medium">{member?.profiles?.full_name}</span>
+                                    <span>{member?.role}</span>
+                                </div>
+                            </li>
+                        )}
+                    >
+                    </ListComponent>
+                </div>
+            )}
         </div>
     )
 }
