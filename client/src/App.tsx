@@ -11,6 +11,7 @@ import CallbackPage from "@/pages/auth/callback-page"
 
 // Home
 import DashboardPage from "@/pages/home/dashboard-page"
+import ProjectPage from "@/pages/home/project-page"
 
 // Common
 import NotFoundPage from "@/pages/not-found-page"
@@ -42,6 +43,8 @@ function App() {
         <Route path={clientPaths.home.dashboard} element={<PrivateRoutes />} >
           <Route element={<HomeLayout />}>
             <Route index element={<DashboardPage />} />
+            <Route path={clientPaths.home.project} element={<ProjectPage />} />
+
           </Route>
 
         </Route>

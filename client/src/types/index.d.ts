@@ -24,3 +24,7 @@ type TProjectMembership = {
 interface IProjectDetails extends TProjects {
     project_memberships: TProjectMembership[];
 }
+
+type TParams = {
+    id: string
+}

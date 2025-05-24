@@ -67,7 +67,7 @@ export const getAllProjects = async (accessToken: string) => {
 
 }
 
-export const getProjectById = async (id: string, accessToken: string) => {
+export const getProjectById = async (id: string, accessToken: string, signal: AbortSignal) => {
   try {
     const response = await fetch(serverPaths.home.project.id.replace(":id", id), {
       method: "GET",
@@ -75,7 +75,8 @@ export const getProjectById = async (id: string, accessToken: string) => {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`
-      }
+      },
+      signal,
     })
 
     const data = await response.json()
