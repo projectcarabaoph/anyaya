@@ -88,7 +88,13 @@ export const getProjectById = async (id: string, accessToken: string, signal: Ab
 
     return data?.data
   } catch (error) {
-    if (error instanceof Error) throw new Error(error.message)
+    if (error instanceof Error) {
+      if (error.name === "AbortError") {
+        return
+      } else {
+        throw new Error(error.message)
+      }
+    }
   }
 
 }

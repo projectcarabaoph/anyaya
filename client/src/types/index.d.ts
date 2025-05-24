@@ -25,6 +25,17 @@ interface IProjectDetails extends TProjects {
     project_memberships: TProjectMembership[];
 }
 
+type TProjectMembershipProfile = {
+    profiles: TProfiles
+    project_id: string
+    role: string
+    added_at: string
+}
+
+interface IProjectDetailWithMembership extends TProjects {
+    project_memberships: TProjectMembershipProfile[];
+}
+
 type TParams = {
     id: string
 }
