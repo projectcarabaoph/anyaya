@@ -1,34 +1,40 @@
-import { toast } from "sonner"
-
-import { Button } from "@/components/ui/button"
-
-import { singOutUser } from "@/api/auth"
-import useAuth from "@/hooks/auth/use-auth"
-import { useProjectModal } from "@/hooks/home/use-project-modal"
+import ListComponent from "@/components/shared/list-component"
+import clientPaths from "@/configs/paths/client.paths.config"
+import useProjects from "@/hooks/home/use-project"
+import { NavLink } from "react-router-dom"
 
 const DashboardPage = () => {
 
-    const { accessToken, setAccessToken } = useAuth()
+    const { isLoading, projects } = useProjects()
 
-    const handleSignOut = async (accessToken: string) => {
-        try {
-            await singOutUser(accessToken)
-            toast.success('Signed out successfully.');
-            setAccessToken('')
-        } catch (error) {
-            if (error instanceof Error) toast.error(error.message)
-        }
-    }
+    console.log(projects)
 
-    const { onOpen } = useProjectModal()
     return (
         <div className="flex flex-col items-center justify-center w-full h-full bg-red-500 ">
-            {/* <Button onClick={() => handleSignOut(accessToken)} >
-                Sign Out
-            </Button> */}
-            <Button onClick={() => onOpen('deleteProjectModal')} >
-                Sign Out
-            </Button>
+            {isLoading ? (
+                <span>loading</span>
+            ) : (
+                <ListComponent
+                    data={projects as TProjects[]}
+                    as='ul'
+                    className=" list-none p-0 m-0 "
+                    renderItem={(project) => (
+                        <li key={project.id}>
+                            <NavLink className="flex flex-col gap-2" to={clientPaths.home.project.replace(":id", project.id)}>
+                                <span>{project.id}</span>
+                                <span>{project.name}</span>
+                                <span>{project.description}</span>
+                            </NavLink>
+                        </li>
+                    )}
+
+                    empty={
+                        <div>
+                            <span>No Project Available.</span>
+                        </div>
+                    }
+                />
+            )}
         </div>
     )
 }
