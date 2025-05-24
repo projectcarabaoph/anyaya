@@ -26,3 +26,14 @@ type TProjectMemberships = {
 interface IProjectDetails extends TProjects {
     project_memberships: TProjectMemberships[];
 }
+
+type TProjectMembershipProfile = {
+    profile: TProfiles
+    project_id: string
+    role: string
+    added_at: string
+}
+
+interface IProjectDetailWithMembership extends TProjects {
+    project_memberships: TProjectMembershipProfile[];
+}

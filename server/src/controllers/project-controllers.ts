@@ -173,11 +173,11 @@ export const getProjectById = async (req: Request, res: Response) => {
 
         const { data, error } = await supabase
             .from('projects')
-            .select('*, project_memberships(*)')
+            .select('*, project_memberships(*, profiles(*))')
             .eq('id', id)
             .eq('owner_id', req.user?.id)
             .eq('is_deleted', false)
-            .single<IProjectDetails>()
+            .single<IProjectDetailWithMembership>()
 
         if (error) throw new ApiError(error.message, 400)
 
