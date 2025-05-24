@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react"
-import { codeSchema } from "@/pages/auth/_libs/schemas"
-import useAuth from "@/hooks/auth/use-auth"
 import { useNavigate } from "react-router-dom"
+
+import useAuth from "@/hooks/auth/use-auth"
 import { callbackToken } from "@/api/auth"
+import { codeSchema } from "@/utils/_schemas"
 
 const useValidateCode = () => {
     const hasRun = useRef(false)

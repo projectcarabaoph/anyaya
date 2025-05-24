@@ -1,5 +1,5 @@
 
-import useValidateCode from "@/pages/auth/_hooks/use-validate-code"
+import useValidateCode from "@/hooks/auth/use-validate-code"
 
 
 const CallbackPage = () => {
