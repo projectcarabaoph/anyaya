@@ -28,7 +28,7 @@ interface IProjectDetails extends TProjects {
 }
 
 type TProjectMembershipProfile = {
-    profile: TProfiles
+    profiles: TProfiles
     role: string
     added_at: string
 }
