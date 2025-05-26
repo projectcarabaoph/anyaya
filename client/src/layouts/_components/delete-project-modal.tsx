@@ -12,8 +12,11 @@ import { Input } from "@/components/ui/input";
 import { useProjectModal } from "@/hooks/home/use-project-modal";
 
 export default function DeleteProjectModal() {
-    const { isOpen, onClose, type } = useProjectModal();
+    const { isOpen, onClose, type, data } = useProjectModal();
     const isModalOpen = isOpen && type === "deleteProjectModal";
+
+
+    console.log(data)
 
     return (
         <Dialog open={isModalOpen} onOpenChange={() => onClose()}>
