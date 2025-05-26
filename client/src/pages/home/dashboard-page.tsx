@@ -33,6 +33,20 @@ const DashboardPage = () => {
         fetAllProjects()
     }, [fetAllProjects])
 
+    const fetAllProjects = useCallback(async () => {
+        try {
+            const response = await getAllProjects(accessToken)
+            console.log(response)
+        } catch (error) {
+            if (error instanceof Error) toast.error(error.message)
+        }
+    }, [accessToken])
+
+
+    useEffect(() => {
+        fetAllProjects()
+    }, [fetAllProjects])
+
     return (
         <div className="flex flex-col gap-2 items-center justify-center w-full min-dvh h-full bg-slate-500 ">
             <Button onClick={() => handleSignOut(accessToken)} >
