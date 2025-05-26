@@ -43,15 +43,15 @@ const ProjectPage = () => {
                         as="ul"
                         renderItem={(member) => (
                             <li className="flex flex-row gap-2 border border-black p-2" key={member.added_at}>
-                                <Avatar title={`${member.profiles?.full_name}'s avatar`}>
+                                <Avatar title={`${member.profile?.avatar_url}'s avatar`}>
                                     <AvatarImage
-                                        src={member?.profiles?.avatar_url as string}
-                                        alt={`${member?.profiles?.full_name}'s avatar`}
+                                        src={member?.profile?.avatar_url as string}
+                                        alt={`${member?.profile?.full_name}'s avatar`}
                                     />
-                                    <AvatarFallback>{avatarInitials(member?.profiles?.full_name)}</AvatarFallback>
+                                    <AvatarFallback>{avatarInitials(member?.profile?.full_name)}</AvatarFallback>
                                 </Avatar>
                                 <div className="flex flex-col">
-                                    <span className="font-medium">{member?.profiles?.full_name}</span>
+                                    <span className="font-medium">{member?.profile?.full_name}</span>
                                     <span>{member?.role}</span>
                                 </div>
                             </li>
