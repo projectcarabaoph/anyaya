@@ -9,10 +9,13 @@ import {
 
 import useProjectById from "@/hooks/home/use-project-by-id";
 import avatarInitials from "@/utils/avatar-initials";
+import { useProjectModal } from '@/hooks/home/use-project-modal';
+import { Button } from '@/components/ui/button';
 
 const ProjectPage = () => {
 
     const { isLoading, project } = useProjectById()
+    const { onOpen } = useProjectModal()
 
     const formatDate = project?.created_at ? format(new Date(project?.created_at as string), 'MMM dd yyyy') : ""
 
@@ -22,9 +25,19 @@ const ProjectPage = () => {
                 <span>loading</span>
             ) : (
                 <div className="flex flex-col gap-2">
-                    <span>{project?.name}</span>
-                    <span>{project?.description}</span>
-                    <span>{formatDate}</span>
+                    <div className='flex flex-row gap-2 justify-between'>
+                        <div className="flex flex-col gap-2">
+                            <span>{project?.name}</span>
+                            <span>{project?.description}</span>
+                            <span>{formatDate}</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <span>Settings</span>
+                            <Button onClick={() => onOpen('deleteProjectModal', project as IProjectDetailWithMembership)} variant='destructive'>
+                                Delete Project
+                            </Button>
+                        </div>
+                    </div>
                     <ListComponent
                         data={project?.project_memberships as TProjectMembershipProfile[]}
                         as="ul"
