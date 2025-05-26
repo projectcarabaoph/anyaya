@@ -99,32 +99,39 @@ export const deleteProjectById = async (req: Request, res: Response) => {
     try {
         const result = deleteProjectByIdSchema.safeParse(req.params)
 
-        if (!result.success) throw new ApiError(result.error.errors[0].message, 400)
+        if (!result.success) {
+            throw new ApiError(result.error.errors[0].message, 400)
+        }
 
         const supabase = serverClient(req, res)
 
-        const { id } = result.data
-
+        const { id: projectId } = result.data
 
         const { data: memberData, error: memberError } = await supabase
             .from('project_memberships')
-            .select('*')
+            .select('role, projects(*)')
             .eq('profile_id', req.user?.id)
-            .eq('project_id', id)
-            .single<TProjectMemberships>();
+            .eq('project_id', projectId)
+            .single<TDeleteProjectById>();
 
-        if (memberError || !memberData) throw new ApiError(memberError?.message || 'Membership not found', 400);
+        if (memberError || !memberData) {
+            throw new ApiError(memberError?.message || 'Membership not found', 400);
+        }
 
-        if (memberData.role !== 'admin') throw new ApiError('Forbidden.', 403);
-
+        if (
+            memberData.role !== 'admin' &&
+            req?.user?.id !== memberData?.projects.owner_id
+        ) {
+            throw new ApiError('Forbidden.', 403);
+        }
 
         const { data, error } = await supabase
             .from('projects')
             .update({
                 is_deleted: true
             })
-            .eq('owner_id', memberData?.profile_id)
-            .eq('id', memberData?.project_id)
+            .eq('owner_id', req?.user?.id)
+            .eq('id', memberData?.projects.id)
             .select('*')
             .single();
 
@@ -132,6 +139,7 @@ export const deleteProjectById = async (req: Request, res: Response) => {
 
         res.status(200).json({ data })
     } catch (error) {
+        console.error(error)
         errorHandler(error, req, res)
         return
     }

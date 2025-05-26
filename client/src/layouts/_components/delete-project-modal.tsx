@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -12,24 +14,22 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-
+import { deleteProjectById } from '@/api/home/project';
+import { deleteProjectSchema } from '@/utils/_schemas';
+import clientPaths from '@/configs/paths/client.paths.config';
 
 import { useProjectModal } from "@/hooks/home/use-project-modal";
-import type { TDeleteProjectSchema } from '@/utils/_types';
-import { deleteProjectById } from '@/api/home/project';
 import useAuth from '@/hooks/auth/use-auth';
-import { toast } from 'sonner';
-import { deleteProjectSchema } from '@/utils/_schemas';
-import useUserProfile from '@/hooks/home/use-user-profile';
+
+import type { TDeleteProjectSchema } from '@/utils/_types';
 
 export default function DeleteProjectModal() {
 
     const { isOpen, onClose, type, data } = useProjectModal();
     const { accessToken } = useAuth()
-    const profile = useUserProfile()
+    const navigate = useNavigate()
 
     const isModalOpen = isOpen && type === "deleteProjectModal";
-
 
     const {
         register,
@@ -42,11 +42,9 @@ export default function DeleteProjectModal() {
 
     const onSubmit = async () => {
         try {
-            if (data?.owner_id !== profile.id) throw new Error('Forbidden.')
-
-            const response = await deleteProjectById(data?.id as string, accessToken)
-            console.log(response)
+            await deleteProjectById(data?.id as string, accessToken)
             onClose()
+            navigate(clientPaths.home.dashboard)
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
         }
@@ -74,8 +72,6 @@ export default function DeleteProjectModal() {
                     {errors.name && (
                         <span className="text-sm text-red-500">{errors.name.message}</span>
                     )}
-
-
                     <DialogFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
                         <Button
                             type="button"
@@ -97,9 +93,6 @@ export default function DeleteProjectModal() {
 
                     </DialogFooter>
                 </form>
-
-
-
             </DialogContent>
         </Dialog>
     )

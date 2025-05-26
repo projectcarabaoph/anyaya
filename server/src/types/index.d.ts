@@ -22,6 +22,10 @@ type TProjectMemberships = {
     added_at: string
 }
 
+type TDeleteProjectById = {
+    projects: TProjects
+    role: string
+}
 
 interface IProjectDetails extends TProjects {
     project_memberships: TProjectMemberships[];
