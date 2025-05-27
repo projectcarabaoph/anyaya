@@ -8,7 +8,7 @@ import clientPaths from "@/configs/paths/client.paths.config"
 import useProjects from "@/hooks/home/use-project"
 import { useProjectModal } from "@/hooks/home/use-project-modal"
 
-const DashboardPage = () => {
+const ProjectDashboardPage = () => {
 
     const { isLoading, projects } = useProjects()
     const { onOpen } = useProjectModal()
@@ -49,4 +49,4 @@ const DashboardPage = () => {
     )
 }
 
-export default DashboardPage
+export default ProjectDashboardPage

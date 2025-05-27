@@ -10,8 +10,8 @@ import SignInPage from "@/pages/auth/sign-in-page"
 import CallbackPage from "@/pages/auth/callback-page"
 
 // Home
-import DashboardPage from "@/pages/home/dashboard-page"
-import ProjectPage from "@/pages/home/project-page"
+import ProjectDashboardPage from "@/pages/home/project-dashboard-page"
+import ProjectIdPage from "@/pages/home/project-id-page"
 
 // Common
 import NotFoundPage from "@/pages/not-found-page"
@@ -30,7 +30,6 @@ function App() {
     createRoutesFromElements(
       <Route>
 
-
         <Route element={<PublicRoutes />} >
           <Route element={<MarketingLayout />}>
             <Route path={clientPaths.marketing.landing} element={<LandingPage />} />
@@ -39,16 +38,13 @@ function App() {
           </Route>
         </Route>
 
-
         <Route path={clientPaths.home.project.dashboard} element={<PrivateRoutes />} >
           <Route element={<HomeLayout />}>
-            <Route index element={<DashboardPage />} />
-            <Route path={clientPaths.home.project.id} element={<ProjectPage />} />
+            <Route index element={<ProjectDashboardPage />} />
+            <Route path={clientPaths.home.project.id} element={<ProjectIdPage />} />
 
           </Route>
-
         </Route>
-
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>

@@ -12,7 +12,7 @@ import avatarInitials from "@/utils/avatar-initials";
 import { useProjectModal } from '@/hooks/home/use-project-modal';
 import { Button } from '@/components/ui/button';
 
-const ProjectPage = () => {
+const ProjectIdPage = () => {
 
     const { isLoading, project } = useProjectById()
     const { onOpen } = useProjectModal()
@@ -64,4 +64,4 @@ const ProjectPage = () => {
     )
 }
 
-export default ProjectPage
+export default ProjectIdPage
