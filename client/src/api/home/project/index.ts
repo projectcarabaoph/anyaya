@@ -15,8 +15,8 @@ import serverPaths from "@/configs/paths/server.paths.config";
 
 
 export const createProject = async (formData: FormData, accessToken: string) => {
-  const name = formData.get('name') as string;
-  const description = formData.get('description') as string;
+  const name = formData.get('name')?.toString().trim();
+  const description = formData.get('description')?.toString().trim();
 
   try {
     const response = await fetch(serverPaths.home.project.create, {
