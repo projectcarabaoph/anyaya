@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from '@/components/ui/textarea';
 
 import { createProjectSchema } from '@/utils/_schemas';
 import clientPaths from '@/configs/paths/client.paths.config';
@@ -48,7 +49,7 @@ export default function ProjectNewForm() {
             </div>
             <div className='flex flex-col gap-1'>
                 <label htmlFor="description">Description</label>
-                <textarea  {...register('description')} />
+                <Textarea  {...register('description')} />
                 {errors.description && (
                     <span className="text-sm text-red-500">{errors.description.message}</span>
                 )}
