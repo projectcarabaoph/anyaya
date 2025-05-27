@@ -13,6 +13,8 @@ import CallbackPage from "@/pages/auth/callback-page"
 import ProjectDashboardPage from "@/pages/home/project-dashboard-page"
 import ProjectIdPage from "@/pages/home/project-id-page"
 import ProjectNewPage from "@/pages/home/project-new-page"
+import ProjectSettingsPage from "@/pages/home/project-settings-page"
+
 
 
 // Common
@@ -45,6 +47,7 @@ function App() {
             <Route index element={<ProjectDashboardPage />} />
             <Route path={clientPaths.home.project.id} element={<ProjectIdPage />} />
             <Route path={clientPaths.home.project.new} element={<ProjectNewPage />} />
+            <Route path={clientPaths.home.project.settings} element={<ProjectSettingsPage />} />
 
           </Route>
         </Route>
