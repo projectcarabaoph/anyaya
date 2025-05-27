@@ -1,6 +1,10 @@
 import * as z from 'zod'
 
-import type { deleteProjectSchema } from "@/utils/_schemas";
+import type {
+    createProjectSchema,
+    deleteProjectSchema
+} from "@/utils/_schemas";
+
 export type TMarketingLayoutNavLinks = {
     id: number,
     name: string,
@@ -8,3 +12,5 @@ export type TMarketingLayoutNavLinks = {
 }
 
 export type TDeleteProjectSchema = z.infer<ReturnType<typeof deleteProjectSchema>>;
+
+export type TCreateProjectSchema = z.infer<typeof createProjectSchema>;
