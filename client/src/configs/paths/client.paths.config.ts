@@ -13,11 +13,12 @@ const schema = z.object({
 
     }),
     home: z.object({
-        dashboard: pathsSchema,
-        project: pathsSchema,
-        project_settings: pathsSchema,
-        project_new: pathsSchema
-
+        project: z.object({
+            dashboard: pathsSchema,
+            id: pathsSchema,
+            settings: pathsSchema,
+            new: pathsSchema
+        })
     })
 })
 
@@ -32,10 +33,12 @@ const clientPaths = schema.parse({
 
     },
     home: {
-        dashboard: "/home",
-        project: '/home/:id',
-        project_settings: '/home/:id/settings',
-        project_new: '/home/new'
+        project: {
+            dashboard: "/home",
+            id: '/home/:id',
+            settings: '/home/:id/settings',
+            new: '/home/new'
+        }
     }
 } satisfies z.infer<typeof schema>)
 

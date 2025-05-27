@@ -30,7 +30,7 @@ const DashboardPage = () => {
                     className=" list-none p-0 m-0 "
                     renderItem={(project) => (
                         <li key={project.id}>
-                            <NavLink className="flex flex-col gap-2" to={clientPaths.home.project.replace(":id", project.id)}>
+                            <NavLink className="flex flex-col gap-2" to={clientPaths.home.project.id.replace(":id", project.id)}>
                                 <span>{project.id}</span>
                                 <span>{project.name}</span>
                                 <span>{project.description}</span>

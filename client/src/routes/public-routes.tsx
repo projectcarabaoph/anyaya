@@ -7,7 +7,7 @@ const PublicRoutes = () => {
     const { accessToken } = useAuth()
     const location = useLocation()
 
-    return accessToken ? <Navigate to={clientPaths.home.dashboard} state={{ from: location }} replace /> : <Outlet />
+    return accessToken ? <Navigate to={clientPaths.home.project.dashboard} state={{ from: location }} replace /> : <Outlet />
 
 }
 

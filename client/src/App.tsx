@@ -40,10 +40,10 @@ function App() {
         </Route>
 
 
-        <Route path={clientPaths.home.dashboard} element={<PrivateRoutes />} >
+        <Route path={clientPaths.home.project.dashboard} element={<PrivateRoutes />} >
           <Route element={<HomeLayout />}>
             <Route index element={<DashboardPage />} />
-            <Route path={clientPaths.home.project} element={<ProjectPage />} />
+            <Route path={clientPaths.home.project.id} element={<ProjectPage />} />
 
           </Route>
 
