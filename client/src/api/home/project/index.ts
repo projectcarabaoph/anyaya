@@ -12,11 +12,10 @@
 */
 
 import serverPaths from "@/configs/paths/server.paths.config";
+import type { TCreateProjectSchema } from "@/utils/_types";
 
 
-export const createProject = async (formData: FormData, accessToken: string) => {
-  const name = formData.get('name')?.toString().trim();
-  const description = formData.get('description')?.toString().trim();
+export const createProject = async (formData: TCreateProjectSchema, accessToken: string) => {
 
   try {
     const response = await fetch(serverPaths.home.project.create, {
@@ -26,7 +25,7 @@ export const createProject = async (formData: FormData, accessToken: string) => 
         Accept: 'application/json',
         Authorization: `Bearer ${accessToken}`
       },
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify(formData),
     });
 
     const data = await response.json()
