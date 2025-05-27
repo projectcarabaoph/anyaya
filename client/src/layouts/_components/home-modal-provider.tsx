@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import DeleteProjectModal from "@/layouts/_components/delete-project-modal"
+import CreateProjectModal from "@/layouts/_components/create-project-modal"
 
 export default function HomeModalProvider() {
     const [isMounted, setIsMounted] = useState<boolean>(false)
@@ -12,6 +13,7 @@ export default function HomeModalProvider() {
 
     return (
         <>
+            <CreateProjectModal />
             <DeleteProjectModal />
         </>
     )
