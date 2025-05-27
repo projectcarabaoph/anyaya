@@ -1,25 +1,18 @@
 import { NavLink } from "react-router-dom"
 
-import { Button } from "@/components/ui/button"
-
 import ListComponent from "@/components/shared/list-component"
 import clientPaths from "@/configs/paths/client.paths.config"
 
 import useProjects from "@/hooks/home/use-project"
-import { useProjectModal } from "@/hooks/home/use-project-modal"
 
 const ProjectDashboardPage = () => {
 
     const { isLoading, projects } = useProjects()
-    const { onOpen } = useProjectModal()
 
 
     return (
         <div className="flex flex-col items-center justify-center w-full h-full bg-red-500 ">
-            <Button onClick={() => {
-                onOpen("createProjectModal")
-                console.log('create')
-            }} variant="secondary">Create Project</Button>
+            <NavLink to={clientPaths.home.project.new} className="bg-white rounded-md p-2">Create Project</NavLink>
 
             {isLoading ? (
                 <span>loading</span>
