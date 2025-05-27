@@ -3,7 +3,9 @@ export interface IScreenSize {
     height: number;
 }
 
-export type TProjectModal = "deleteProjectModal";
+export type TProjectModal =
+    "createProjectModal"
+    | "deleteProjectModal";
 
 export interface IProjectModalStore {
     type: TProjectModal | null;
