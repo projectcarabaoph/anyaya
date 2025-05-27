@@ -2,7 +2,10 @@
 import { z } from "zod";
 
 export const codeSchema = z.object({
-    code: z.string().uuid()
+    code: z
+        .string()
+        .trim()
+        .uuid()
 })
 
 
@@ -10,6 +13,7 @@ export const deleteProjectSchema = (projectName: string) =>
     z.object({
         name: z
             .string()
+            .trim()
             .min(1, { message: 'Project Name is required.' })
             .refine((val) => val === projectName, {
                 message: 'Project Name does not match.',
@@ -19,6 +23,7 @@ export const deleteProjectSchema = (projectName: string) =>
 export const createProjectSchema = z.object({
     name: z
         .string()
+        .trim()
         .min(1, { message: 'Project Name is required.' })
         .superRefine((value, ctx) => {
             if (value.length <= 6) {
@@ -36,6 +41,7 @@ export const createProjectSchema = z.object({
         }),
     description: z
         .string()
+        .trim()
         .min(1, { message: 'Description is required.' })
         .superRefine((value, ctx) => {
             if (value.length <= 10) {
