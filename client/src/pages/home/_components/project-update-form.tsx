@@ -43,7 +43,7 @@ export default function ProjectUpdateForm() {
     }
 
     const goBack = () => {
-        navigate(clientPaths.home.project.dashboard)
+        navigate(-1)
     }
 
     useEffect(() => {
