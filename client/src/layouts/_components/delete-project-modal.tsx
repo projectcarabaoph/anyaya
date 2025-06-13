@@ -34,6 +34,7 @@ export default function DeleteProjectModal() {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { isLoading, isDirty, isValid, errors }
     } = useForm<TDeleteProjectSchema>({
         resolver: zodResolver(deleteProjectSchema(data?.name as string)),
@@ -44,6 +45,7 @@ export default function DeleteProjectModal() {
         try {
             await deleteProjectById(data?.id as string, accessToken)
             onClose()
+            reset()
             navigate(clientPaths.home.project.dashboard)
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
