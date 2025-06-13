@@ -20,10 +20,10 @@ const ProjectDashboardPage = () => {
                 <ListComponent
                     data={projects as TProjects[]}
                     as='ul'
-                    className=" list-none p-0 m-0 "
+                    className="flex flex-col gap-2 list-none p-0 m-0 "
                     renderItem={(project) => (
                         <li key={project.id}>
-                            <NavLink className="flex flex-col gap-2" to={clientPaths.home.project.id.replace(":id", project.id)}>
+                            <NavLink className="flex flex-col gap-2 border border-black" to={clientPaths.home.project.id.replace(":id", project.id)}>
                                 <span>{project.id}</span>
                                 <span>{project.name}</span>
                                 <span>{project.description}</span>
