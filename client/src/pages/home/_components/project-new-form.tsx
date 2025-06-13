@@ -38,6 +38,10 @@ export default function ProjectNewForm() {
         }
     }
 
+    const goBack = () => {
+        navigate(clientPaths.home.project.dashboard)
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white flex flex-col gap-2 w-full max-w-md p-2 rounded-md">
             <div className='flex flex-col gap-1'>
@@ -54,7 +58,15 @@ export default function ProjectNewForm() {
                     <span className="text-sm text-red-500">{errors.description.message}</span>
                 )}
             </div>
-            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+            <div className="flex  items-center justify-center flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                <Button
+                    onClick={goBack}
+                    type="button"
+                    variant="link"
+                    className="w-full sm:w-auto"
+                >
+                    Cancel
+                </Button>
                 <Button
                     disabled={isLoading || !isDirty || !isValid}
                     type="submit"
@@ -65,6 +77,6 @@ export default function ProjectNewForm() {
                 </Button>
 
             </div>
-        </form>
+        </form >
     )
 }
