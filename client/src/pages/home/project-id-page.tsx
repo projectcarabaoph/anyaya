@@ -11,6 +11,8 @@ import useProjectById from "@/hooks/home/use-project-by-id";
 import avatarInitials from "@/utils/avatar-initials";
 import { useProjectModal } from '@/hooks/home/use-project-modal';
 import { Button } from '@/components/ui/button';
+import { NavLink } from 'react-router-dom';
+import clientPaths from '@/configs/paths/client.paths.config';
 
 const ProjectIdPage = () => {
 
@@ -32,7 +34,9 @@ const ProjectIdPage = () => {
                             <span>{formatDate}</span>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <span>Settings</span>
+                            <NavLink className='bg-slate-300 text-center h-9 px-4 py-2 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-neutral-300' to={clientPaths.home.project.settings.replace(":id", project?.id as string)}>
+                                Update
+                            </NavLink>
                             <Button onClick={() => onOpen('deleteProjectModal', project as IProjectDetailWithMembership)} variant='destructive'>
                                 Delete Project
                             </Button>
