@@ -14,15 +14,19 @@ import useAuth from '@/hooks/auth/use-auth';
 
 import type { TCreateProjectSchema } from '@/utils/_types';
 import { createProject } from '@/api/home/project';
+import useProjectById from '@/hooks/home/use-project-by-id';
+import { useEffect } from 'react';
 
 export default function ProjectUpdateForm() {
 
     const { accessToken } = useAuth()
     const navigate = useNavigate()
+    const { isLoading: isProjectLoading, project } = useProjectById()
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { isLoading, isDirty, isValid, errors }
     } = useForm<TCreateProjectSchema>({
         resolver: zodResolver(createProjectSchema),
@@ -38,8 +42,23 @@ export default function ProjectUpdateForm() {
         }
     }
 
-    return (
+    const goBack = () => {
+        navigate(clientPaths.home.project.dashboard)
+    }
+
+    useEffect(() => {
+        reset({
+            name: project?.name,
+            description: project?.description
+        })
+    }, [project, reset])
+
+    return isProjectLoading ? (
+        <div>Loading..</div>
+    ) : (
+
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white flex flex-col gap-2 w-full max-w-md p-2 rounded-md">
+
             <div className='flex flex-col gap-1'>
                 <label htmlFor="name">Project Name</label>
                 <Input  {...register('name')} />
@@ -55,6 +74,15 @@ export default function ProjectUpdateForm() {
                 )}
             </div>
             <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                <Button
+                    onClick={goBack}
+                    type="button"
+                    variant="link"
+                    className="w-full sm:w-auto"
+                >
+                    Cancel
+                </Button>
+
                 <Button
                     disabled={isLoading || !isDirty || !isValid}
                     type="submit"
