@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from "@/components/ui/button";
@@ -12,10 +13,10 @@ import clientPaths from '@/configs/paths/client.paths.config';
 
 import useAuth from '@/hooks/auth/use-auth';
 
-import type { TCreateProjectSchema } from '@/utils/_types';
-import { createProject } from '@/api/home/project';
+import { updateProjectById } from '@/api/home/project';
 import useProjectById from '@/hooks/home/use-project-by-id';
-import { useEffect } from 'react';
+
+import type { TCreateProjectSchema } from '@/utils/_types';
 
 export default function ProjectUpdateForm() {
 
@@ -34,8 +35,17 @@ export default function ProjectUpdateForm() {
     })
 
     const onSubmit = async (formData: TCreateProjectSchema) => {
+
         try {
-            await createProject(formData, accessToken)
+
+            const id = project?.id as string
+            const newFormData = {
+                id,
+                accessToken,
+                ...formData,
+            }
+
+            await updateProjectById(newFormData)
             navigate(clientPaths.home.project.dashboard)
         } catch (error) {
             if (error instanceof Error) toast.error(error.message)
