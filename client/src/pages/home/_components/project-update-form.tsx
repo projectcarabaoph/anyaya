@@ -68,7 +68,9 @@ export default function ProjectUpdateForm() {
     ) : (
 
         <form onSubmit={handleSubmit(onSubmit)} className="bg-white flex flex-col gap-2 w-full max-w-md p-2 rounded-md">
-
+            <div className='flex flex-col gap-1'>
+                <h2>Update Project Details</h2>
+            </div>
             <div className='flex flex-col gap-1'>
                 <label htmlFor="name">Project Name</label>
                 <Input  {...register('name')} />
