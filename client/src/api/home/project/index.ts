@@ -11,6 +11,7 @@
                                                               
 */
 
+import type { TUpdateProjectById } from "@/api/_types";
 import serverPaths from "@/configs/paths/server.paths.config";
 import type { TCreateProjectSchema } from "@/utils/_types";
 
@@ -109,6 +110,33 @@ export const deleteProjectById = async (id: string, accessToken: string) => {
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`
       }
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      const { message } = data
+      throw new Error(message)
+    }
+
+    return data?.data
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message)
+  }
+}
+
+
+export const updateProjectById = async (formData: TUpdateProjectById) => {
+  const { id, name, description, accessToken } = formData
+  try {
+    const response = await fetch(serverPaths.home.project.update.replace(":id", id), {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({ name, description })
     })
 
     const data = await response.json()
