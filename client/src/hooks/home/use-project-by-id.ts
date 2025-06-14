@@ -27,7 +27,14 @@ const useProjectById = () => {
                 const response = await getProjectById(id, accessToken, signal);
                 setProject(response)
             } catch (error) {
-                if (error instanceof Error) toast.error(error.message)
+                if (error instanceof Error) {
+                    if (error.message === "JSON object requested, multiple (or no) rows returned") {
+                        navigate('*')
+                    } else {
+                        toast.error(error.message)
+                    }
+
+                }
             } finally {
                 setIsLoading(false)
             }
